@@ -1,0 +1,23 @@
+package com.nexabank.models
+
+import jakarta.persistence.*
+import org.springframework.security.core.userdetails.UserDetails
+
+@Entity
+data class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0,
+
+    @Column(nullable = false, unique = true)
+    val username: String,
+
+    @Column(nullable = false)
+    val password: String,
+
+    @Column(nullable = false)
+    val email: String,
+
+    @Column(nullable = false)
+    val balance: Double = 0.0
+)
