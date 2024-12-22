@@ -28,6 +28,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("mysql:mysql-connector-java:8.0.33")
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("org.springframework.security:spring-security-test")
