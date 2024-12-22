@@ -1,7 +1,7 @@
 package com.nexabank.controllers
 
 import com.nexabank.models.User
-import com.nexabank.models.core.RequestBodyForm
+import com.nexabank.models.dto.UserRequest
 import com.nexabank.security.JwtUtil
 import com.nexabank.services.UserService
 import org.springframework.http.HttpStatus
@@ -23,14 +23,15 @@ class AuthController
 
     // Registration endpoint
     @PostMapping("/register")
-    fun register(@RequestBody registerRequest: RequestBodyForm): ResponseEntity<String> {
+    fun register(@RequestBody registerRequest: UserRequest): ResponseEntity<String> {
         // Hash the password before saving it
         val encodedPassword = passwordEncoder.encode(registerRequest.password)
         // Create a User object based on the incoming data
         val newUser = User(
             username = registerRequest.username,
             password = encodedPassword, // You should hash the password in production
-            email = registerRequest.email!!
+            email = registerRequest.email!!,
+            balance = registerRequest.balance!!
         )
 
         // Save user to database
@@ -40,11 +41,11 @@ class AuthController
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody requestBodyForm: RequestBodyForm): String {
+    fun login(@RequestBody userRequest: UserRequest): String {
         return try {
-            println("Login attempt: username=${requestBodyForm.username}")
+            println("Login attempt: username=${userRequest.username}")
             val auth = authenticationManager.authenticate(
-                UsernamePasswordAuthenticationToken(requestBodyForm.username, requestBodyForm.password)
+                UsernamePasswordAuthenticationToken(userRequest.username, userRequest.password)
             )
             println("Authentication successful for: ${auth.name}")
             JwtUtil.generateToken(auth.name)

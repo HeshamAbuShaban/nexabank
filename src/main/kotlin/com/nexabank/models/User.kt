@@ -19,5 +19,5 @@ data class User(
     val email: String,
 
     @Column(nullable = false)
-    val balance: Double = 0.0
+    var balance: Double = 0.0
 )
