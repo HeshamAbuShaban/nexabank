@@ -24,9 +24,9 @@ class AdminController(
         return transactionService.getAllTransactions(page, size)
     }
 
-    @PutMapping("/transactions/{id}/flag")
+    /*@PutMapping("/transactions/{id}/flag")
     fun flagTransaction(@PathVariable id: Long): ResponseEntity<Transaction> {
         val transaction = transactionService.flagTransaction(id)
         return ResponseEntity.ok(transaction)
-    }
+    }*/
 }
