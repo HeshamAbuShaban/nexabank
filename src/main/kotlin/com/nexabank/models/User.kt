@@ -1,7 +1,6 @@
 package com.nexabank.models
 
 import jakarta.persistence.*
-import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 data class User(

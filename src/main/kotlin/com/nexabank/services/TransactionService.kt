@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 class TransactionService(
     private val transactionRepository: TransactionRepository,
     private val userRepository: UserRepository, // To get users for transactions
-    private val notificationService: NotificationService
+    /*private val notificationService: NotificationService*/
 ) {
 
     fun createTransaction(senderUsername: String, recipientUsername: String, amount: Double, description: String?): Transaction {
@@ -45,8 +45,8 @@ class TransactionService(
         userRepository.save(recipient)
 
         // Notify sender and recipient
-        notificationService.sendTransactionNotification(sender.email, "Transaction Successful", "Your transaction was successful.")
-        notificationService.sendTransactionNotification(recipient.email, "You Received Money", "You received $$amount from ${sender.username}.")
+        /*notificationService.sendTransactionNotification(sender.email, "Transaction Successful", "Your transaction was successful.")
+        notificationService.sendTransactionNotification(recipient.email, "You Received Money", "You received $$amount from ${sender.username}.")*/
 
         return transactionRepository.save(transaction)
     }
@@ -106,7 +106,7 @@ class TransactionService(
         userRepository.save(recipient)
 
         // Notify both parties about the reversal
-        notificationService.sendTransactionNotification(
+        /*notificationService.sendTransactionNotification(
             sender.email,
             "Transaction Reversed",
             "A transaction of $${transaction.amount} was reversed. Your balance has been updated."
@@ -115,7 +115,7 @@ class TransactionService(
             recipient.email,
             "Transaction Reversed",
             "A transaction of $${transaction.amount} was reversed. Your balance has been updated."
-        )
+        )*/
 
         return transactionRepository.save(transaction)
     }

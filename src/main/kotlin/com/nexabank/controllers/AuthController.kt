@@ -4,6 +4,8 @@ import com.nexabank.models.User
 import com.nexabank.models.dto.UserRequest
 import com.nexabank.security.JwtUtil
 import com.nexabank.services.UserService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
+@Tag(name = "Authentication", description = "APIs for user authentication")
 @RestController
 @RequestMapping("/api/auth")
 class AuthController
@@ -21,7 +24,7 @@ class AuthController
     private val passwordEncoder: PasswordEncoder
 ) {
 
-    // Registration endpoint
+    @Operation(summary = "Register user", description = "Create a new user account.")
     @PostMapping("/register")
     fun register(@RequestBody registerRequest: UserRequest): ResponseEntity<String> {
         // Hash the password before saving it
@@ -40,6 +43,7 @@ class AuthController
         return ResponseEntity.ok("User registered successfully")
     }
 
+    @Operation(summary = "Login user", description = "Authenticate and log in a user.")
     @PostMapping("/login")
     fun login(@RequestBody userRequest: UserRequest): String {
         return try {

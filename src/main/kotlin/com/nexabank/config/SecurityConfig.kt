@@ -26,7 +26,11 @@ class SecurityConfig(
             .authorizeHttpRequests { requests ->
                 // Define public and protected endpoints
                 requests
-                    .requestMatchers("/api/auth/**", "/error").permitAll() // Public: Login/Register
+                    .requestMatchers("/api/auth/**", "/error",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui.html"
+                    ).permitAll() // Public: Login/Register
                     .anyRequest().authenticated() // Protected: Requires authentication
             }
             .addFilterBefore(
