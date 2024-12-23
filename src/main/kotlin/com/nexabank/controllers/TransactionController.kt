@@ -4,11 +4,10 @@ import com.nexabank.models.Transaction
 import com.nexabank.models.dto.TransactionRequest
 import com.nexabank.models.enums.TransactionStatus
 import com.nexabank.services.TransactionService
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.data.domain.Page
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "Transactions", description = "APIs for handling transactions")
 @RestController
@@ -39,12 +38,7 @@ class TransactionController(
         return ResponseEntity.ok(transaction)
     }
 
-    @Operation(summary = "Get Transaction History", description = "Get all Transaction for any user.")
-    @GetMapping("/history/all/{username}")
-    fun getTransactionHistory(@PathVariable username: String): ResponseEntity<List<Transaction>> {
-        val transactions = transactionService.getTransactionHistory(username)
-        return ResponseEntity.ok(transactions)
-    }
+
 
     @Operation(summary = "Get Pageable Transaction History", description = "-Pageable- Get all Transaction for any user.")
     @GetMapping("/history/{username}")
@@ -53,7 +47,7 @@ class TransactionController(
         @RequestParam page: Int,
         @RequestParam size: Int,
         @RequestParam status: TransactionStatus?
-    ): ResponseEntity<Page<Transaction>> {
+    ): ResponseEntity<Iterable<Transaction>> {
         val transactions = transactionService.getTransactionHistory(username, page, size, status)
         return ResponseEntity.ok(transactions)
     }

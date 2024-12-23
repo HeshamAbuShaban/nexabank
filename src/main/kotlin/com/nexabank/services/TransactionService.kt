@@ -2,12 +2,15 @@ package com.nexabank.services
 
 import com.nexabank.models.Transaction
 import com.nexabank.models.enums.TransactionStatus
+import com.nexabank.aop.security.ValidateAccess
 import com.nexabank.repositories.TransactionRepository
 import com.nexabank.repositories.UserRepository
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 
 @Service
@@ -15,9 +18,15 @@ class TransactionService(
     private val transactionRepository: TransactionRepository,
     private val userRepository: UserRepository, // To get users for transactions
     /*private val notificationService: NotificationService*/
+    private val authorizationService: AuthorizationService
 ) {
 
-    fun createTransaction(senderUsername: String, recipientUsername: String, amount: Double, description: String?): Transaction {
+    fun createTransaction(
+        senderUsername: String,
+        recipientUsername: String,
+        amount: Double,
+        description: String?
+    ): Transaction {
         val sender = userRepository.findByUsername(senderUsername)
             ?: throw IllegalArgumentException("Sender not found")
         val recipient = userRepository.findByUsername(recipientUsername)
@@ -63,63 +72,60 @@ class TransactionService(
         }
     }
 
-    fun getTransactionHistory(username: String): List<Transaction> {
+    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    fun getTransactionHistory(
+        username: String,
+        page: Int? = null,
+        size: Int? = null,
+        status: TransactionStatus? = null
+    ): Iterable<Transaction> {
         val user = userRepository.findByUsername(username)
             ?: throw IllegalArgumentException("User not found")
 
-        // Get all transactions for the user (both sent and received)
-        return transactionRepository.findBySender(user) + transactionRepository.findByRecipient(user)
-    }
-
-    fun getTransactionHistory(username: String, page: Int, size: Int, status: TransactionStatus?): Page<Transaction> {
-        val user = userRepository.findByUsername(username)
-            ?: throw IllegalArgumentException("User not found")
-
-        val pageable: Pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "timestamp"))
-
-        return if (status != null) {
-            transactionRepository.findBySenderOrRecipientAndStatus(user, user, status, pageable)
+        return if (page != null && size != null) {
+            val pageable: Pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "timestamp"))
+            if (status != null) {
+                transactionRepository.findBySenderOrRecipientAndStatus(user, user, status, pageable)
+            } else {
+                transactionRepository.findBySenderOrRecipient(user, user, pageable)
+            }
         } else {
-            transactionRepository.findBySenderOrRecipient(user, user, pageable)
+            transactionRepository.findBySender(user) + transactionRepository.findByRecipient(user)
         }
     }
 
+    private val logger = LoggerFactory.getLogger(TransactionService::class.java)
 
+//    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true) // pause due the difficulty pulling the name through the annotation!
     fun reverseTransaction(transactionId: Long): Transaction {
-        val transaction = transactionRepository.findById(transactionId)
-            .orElseThrow { IllegalArgumentException("Transaction not found") }
+        try {
+            val transaction = transactionRepository.findById(transactionId)
+                .orElseThrow { IllegalArgumentException("Transaction not found") }
 
-        if (transaction.status != TransactionStatus.COMPLETED) {
-            throw IllegalArgumentException("Only completed transactions can be reversed")
+            authorizationService.validateUserAccess(transaction.sender.username)
+
+            if (transaction.status != TransactionStatus.COMPLETED) {
+                throw IllegalArgumentException("Only completed transactions can be reversed")
+            }
+
+            transaction.sender.adjustBalance(transaction.amount)
+            transaction.recipient.adjustBalance(-transaction.amount)
+
+            transaction.status = TransactionStatus.FAILED
+
+            userRepository.save(transaction.sender)
+            userRepository.save(transaction.recipient)
+
+            logger.info("Transaction $transactionId successfully reversed by ${transaction.sender.username}")
+            return transactionRepository.save(transaction)
+        } catch (e: Exception) {
+            logger.error("Failed to reverse transaction $transactionId: ${e.message}")
+            throw e
         }
-
-        val sender = transaction.sender
-        val recipient = transaction.recipient
-
-        // Reverse amounts
-        sender.balance += transaction.amount
-        recipient.balance -= transaction.amount
-
-        transaction.status = TransactionStatus.FAILED
-
-        userRepository.save(sender)
-        userRepository.save(recipient)
-
-        // Notify both parties about the reversal
-        /*notificationService.sendTransactionNotification(
-            sender.email,
-            "Transaction Reversed",
-            "A transaction of $${transaction.amount} was reversed. Your balance has been updated."
-        )
-        notificationService.sendTransactionNotification(
-            recipient.email,
-            "Transaction Reversed",
-            "A transaction of $${transaction.amount} was reversed. Your balance has been updated."
-        )*/
-
-        return transactionRepository.save(transaction)
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     fun getAllTransactions(page: Int, size: Int): Page<Transaction> {
         val pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "timestamp"))
         return transactionRepository.findAll(pageable)
