@@ -34,7 +34,8 @@ class AuthController
             username = registerRequest.username,
             password = encodedPassword, // You should hash the password in production
             email = registerRequest.email!!,
-            balance = registerRequest.balance!!
+            balance = registerRequest.balance!!,
+            role = registerRequest.role
         )
 
         // Save user to database

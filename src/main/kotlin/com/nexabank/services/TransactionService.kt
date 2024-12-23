@@ -21,6 +21,7 @@ class TransactionService(
     private val authorizationService: AuthorizationService
 ) {
 
+    @ValidateAccess(checkCurrentUser = true)
     fun createTransaction(
         senderUsername: String,
         recipientUsername: String,
