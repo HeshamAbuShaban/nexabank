@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TransactionRepository : JpaRepository<Transaction, Long> {
+    override fun findAll(pageable: Pageable): Page<Transaction>
     fun findBySender(sender: User): List<Transaction>
     fun findByRecipient(recipient: User): List<Transaction>
     fun findByStatus(status: TransactionStatus): List<Transaction>
