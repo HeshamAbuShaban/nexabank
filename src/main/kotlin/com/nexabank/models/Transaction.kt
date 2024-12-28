@@ -26,9 +26,9 @@ data class Transaction(
 
     val description: String? = null, // Optional description for the transaction
 
-    /*
-    * var isFlagged:Boolean = false
-    * */
+    var isFlagged:Boolean = false,
+
+    val category: String? = null,
 
     @Column(nullable = false)
     val timestamp: LocalDateTime = LocalDateTime.now()

@@ -5,11 +5,13 @@ import com.nexabank.models.User
 import com.nexabank.services.TransactionService
 import com.nexabank.services.UserService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
+@Tag(name = "Admin", description = "APIs for handling Admins action")
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
@@ -26,11 +28,14 @@ class AdminController(
         return transactionService.getAllTransactions(page, size)
     }
 
-    /*@PutMapping("/transactions/{id}/flag")
+    @Operation(
+        summary = "Flag a transaction as an Admin",
+        description = "Mark a specific transaction as unauthorized or suspicious."
+    )
+    @PutMapping("/transactions/{id}/flag")
     fun flagTransaction(@PathVariable id: Long): ResponseEntity<Transaction> {
-        val transaction = transactionService.flagTransaction(id)
-        return ResponseEntity.ok(transaction)
-    }*/
+        return ResponseEntity.ok(transactionService.flagTransaction(id))
+    }
 
     @Operation(summary = "Get Some User's Details", description = "Fetch user's data (as an admin).")
     @GetMapping("/username")

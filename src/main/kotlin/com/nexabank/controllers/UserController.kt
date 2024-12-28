@@ -2,6 +2,7 @@ package com.nexabank.controllers
 
 import com.nexabank.aop.security.ValidateAccess
 import com.nexabank.models.User
+import com.nexabank.models.dto.update.UpdateUserRequest
 import com.nexabank.services.UserService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
-// TODO : This Controller Isn't really useful unless an admin role was founded
 @Tag(name = "Users", description = "APIs for handling users")
 @RestController
 @RequestMapping("/api/users")
@@ -39,4 +39,21 @@ class UserController(private val userService: UserService) {
         val users = userService.getAllUsers()
         return ResponseEntity.ok(users)
     }
+
+    @Operation(summary = "Update Active User Details", description = "update user's data (must be actual user that access).")
+    @PutMapping("/{username}")
+    fun updateUserInfo(
+        @PathVariable username: String,
+        @RequestBody updateRequest: UpdateUserRequest
+    ): ResponseEntity<User> {
+        return ResponseEntity.ok(userService.updateUserInfo(username, updateRequest))
+    }
+
+    @Operation(summary = "Delete Active User", description = "wipe user's data from bank!.")
+    @DeleteMapping("/{username}")
+    fun deleteUserAccount(@PathVariable username: String): ResponseEntity<String> {
+        userService.deleteUserAccount(username)
+        return ResponseEntity.ok("User $username deleted successfully.")
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.nexabank.controllers
 
+import com.nexabank.aop.security.ValidateAccess
 import com.nexabank.models.Transaction
+import com.nexabank.models.dto.SpendingInsights
 import com.nexabank.models.dto.TransactionRequest
 import com.nexabank.models.enums.TransactionStatus
 import com.nexabank.services.TransactionService
@@ -26,7 +28,8 @@ class TransactionController(
             transactionRequest.senderUsername,
             transactionRequest.recipientUsername,
             transactionRequest.amount,
-            transactionRequest.description
+            transactionRequest.description,
+            transactionRequest.category
         )
         return ResponseEntity.ok(transaction)
     }
@@ -38,9 +41,29 @@ class TransactionController(
         return ResponseEntity.ok(transaction)
     }
 
+    @Operation(
+        summary = "Get spending insights",
+        description = "Fetch categorized spending insights based on transaction history."
+    )
+    @GetMapping("/{username}/spending-insights")
+    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    fun getSpendingInsights(@PathVariable username: String): ResponseEntity<SpendingInsights> {
+        return ResponseEntity.ok(transactionService.getSpendingInsights(username))
+    }
 
+    @Operation(
+        summary = "Flag a transaction",
+        description = "Mark a specific transaction as unauthorized or suspicious."
+    )
+    @PutMapping("/{transactionId}/flag")
+    fun flagTransaction(@PathVariable transactionId: Long): ResponseEntity<String> {
+        return ResponseEntity.ok("Transaction flagged for review.\n" + transactionService.flagTransaction(transactionId))
+    }
 
-    @Operation(summary = "Get Pageable Transaction History", description = "-Pageable- Get all Transaction for any user.")
+    @Operation(
+        summary = "Get Pageable Transaction History",
+        description = "-Pageable- Get all Transaction for any user."
+    )
     @GetMapping("/history/{username}")
     fun getTransactionHistory(
         @PathVariable username: String,

@@ -10,13 +10,13 @@ data class User(
     val id: Long = 0,
 
     @Column(nullable = false, unique = true)
-    val username: String,
+    var username: String,
 
     @Column(nullable = false)
     val password: String,
 
     @Column(nullable = false)
-    val email: String,
+    var email: String,
 
     @Column(nullable = false)
     var balance: Double = 0.0,
