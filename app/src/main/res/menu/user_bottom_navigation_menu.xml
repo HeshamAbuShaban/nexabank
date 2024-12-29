@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:orderInCategory="1"
+        android:title="@string/dashboard" />
+
+    <item
+        android:id="@+id/transactions"
+        android:icon="@drawable/ic_transactions"
+        android:orderInCategory="2"
+        android:title="@string/transactions" />
+
+    <item
+        android:id="@+id/loans"
+        android:icon="@drawable/ic_loans"
+        android:orderInCategory="3"
+        android:title="@string/loans" />
+
+    <item android:id="@+id/creditCards"
+        android:icon="@drawable/ic_credit_card"
+        android:orderInCategory="4"
+        android:title="@string/credit_cards" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="5"
+        android:title="@string/settings" />
+
+</menu>

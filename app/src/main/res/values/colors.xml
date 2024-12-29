@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="nice_gray">#303030</color>
+    <!--Customs-->
+    <color name="night_window_background_color">#121212</color>
+
+    <!--Ch-->
+    <color name="smooth_red">#BA324F</color>
+    <color name="smooth_yellow">#E6B43C</color>
+    <color name="smooth_green">#2DA037</color>
+    <color name="smooth_blue">#1E6ECD</color>
+
+    <color name="grayBackground">#303030</color>
+
+    <color name="less_black">#99000000</color>
+    <color name="less_white">#DCDCDC</color>
+    <color name="less_grey">#803C3C3C</color>
+    <color name="calm_gray">#5A788C</color>
+
+    <color name="colorPrimary">#148719</color>
+    <color name="colorPrimaryDark">#173218</color>
+    <color name="colorAccent">#08FF04</color>
+    <color name="mediumDarkBackground">#303030</color>
+    <color name="darkBackground">#202020</color>
+    <color name="lightBackground">#404040</color>
+</resources>
