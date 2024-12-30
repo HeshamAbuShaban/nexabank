@@ -5,6 +5,11 @@
         <item name="backgroundTint">@color/transparent</item>
     </style>
 
+    <style name="AppTextStyle" parent="ThemeOverlay.Base.Theme.NexaBank.HighContrast">
+        <item name="android:textViewStyle">@style/AppTextStyle</item>
+        <item name="backgroundTint">@color/transparent</item>
+    </style>
+
     <style name="MusicSubtitleText" parent="Widget.MaterialComponents.TextView">
         <!--
                 android:ellipsize="marquee"

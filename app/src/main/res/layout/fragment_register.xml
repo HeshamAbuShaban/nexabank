@@ -4,44 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.LoginFragment">
+    tools:context=".ui.fragments.RegisterFragment">
 
-    <!-- Login Card -->
+    <!-- Register Card -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/loginCard"
+        android:id="@+id/registerCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_12sdp"
+        app:cardCornerRadius="@dimen/_24sdp"
         android:layout_margin="@dimen/_16sdp"
-        app:cardCornerRadius="@dimen/_32sdp"
-        app:cardElevation="@dimen/_16sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="?attr/colorPrimary"
-        app:strokeWidth="@dimen/_2sdp">
+        app:strokeWidth="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Card Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/_24sdp">
+            android:padding="@dimen/_24sdp"
+            android:layout_gravity="center">
 
             <!-- App Logo (Optional) -->
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:src="@mipmap/ic_launcher"
                 android:layout_gravity="center"
-                android:contentDescription="@string/the_app_logo"
-                android:src="@mipmap/ic_launcher" />
+                android:contentDescription="@string/the_app_logo" />
 
-            <!-- Email Input -->
+            <!-- Username Input -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:helperText="Enter your username"
+                app:helperTextTextColor="?attr/colorOnSurface">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_your_username"
+                    android:textColor="?attr/colorOnSurface" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email Input (Optional) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="Enter your email address"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -49,16 +65,16 @@
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_your_email"
                     android:inputType="textEmailAddress"
+                    android:hint="@string/enter_your_email"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password Input -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="Enter your password"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -66,51 +82,43 @@
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_your_password"
                     android:inputType="textPassword"
+                    android:hint="@string/enter_your_password"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Login Button -->
+            <!-- Balance Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:helperText="Enter your balance"
+                app:helperTextTextColor="?attr/colorOnSurface">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/balanceEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/do_you_have_an_initial_balance"
+                    android:textColor="?attr/colorOnSurface" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Register Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginButton"
+                android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:text="@string/login"
+                android:text="@string/register"
                 android:textColor="?attr/colorOnPrimary"
-                app:backgroundTint="?attr/colorPrimary"
-                app:cornerRadius="@dimen/_32sdp"
-                app:icon="@drawable/ic_login"
-                app:iconPadding="@dimen/_8sdp" />
-
-            <!-- Forgot Password and Create Account Links -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                app:cornerRadius="@dimen/_16sdp"
+                app:icon="@drawable/ic_account_balance"
+                app:iconPadding="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <!-- Forgot Password -->
-                <TextView
-                    android:id="@+id/forgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:text="@string/forgot_password"
-                    android:textColor="?attr/colorPrimary" />
-
-                <!-- Create New Account -->
-                <TextView
-                    android:id="@+id/createAccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/don_t_have_an_account"
-                    android:textColor="?attr/colorPrimary" />
-            </LinearLayout>
+                app:backgroundTint="?attr/colorPrimary"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

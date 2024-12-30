@@ -6,5 +6,15 @@
     <string name="loans">Loans</string>
     <string name="settings">Settings</string>
     <string name="credit_cards">Credit Cards</string>
+    <!--Hint Text-->
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="the_app_logo">The App Logo</string>
+    <string name="enter_your_username">Enter your username</string>
+    <string name="do_you_have_an_initial_balance">Do you have an initial balance?</string>
+    <string name="register">Register</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 
 </resources>
