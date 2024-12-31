@@ -24,4 +24,10 @@ object CoreModule {
             Keys.SHARED_PREFERENCES_NAME,
             Context.MODE_PRIVATE
         )
+
+    @Singleton
+    @Provides
+    fun provideAppSharedPreferences(
+        sharedPreferences: SharedPreferences,
+    ): AppSharedPreferences = AppSharedPreferences(sharedPreferences)
 }

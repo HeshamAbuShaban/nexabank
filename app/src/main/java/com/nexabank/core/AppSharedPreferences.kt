@@ -10,10 +10,7 @@ import javax.inject.Inject
  * so we could call it from anywhere in the app.
  * its a controller class to the SharedPreferences class.
  * */
-object AppSharedPreferences {
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+class AppSharedPreferences @Inject constructor(private val sharedPreferences: SharedPreferences) {
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
     // Token
