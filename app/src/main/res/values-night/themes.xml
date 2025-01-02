@@ -1,5 +1,6 @@
 <resources>
     <style name="Base.Theme.NexaBank" parent="Theme.Material3.DynamicColors.Dark.NoActionBar">
+        <item name="android:statusBarColor">?attr/statusBarBackground</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="font">@font/inter_black</item>
         <item name="fontFamily">@font/inter_family</item>

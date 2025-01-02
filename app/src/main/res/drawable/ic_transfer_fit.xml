@@ -3,5 +3,5 @@
     <item
         android:width="@dimen/_24sdp"
         android:height="@dimen/_24sdp"
-        android:drawable="@drawable/ic_withdraw" />
+        android:drawable="@drawable/ic_transfer" />
 </layer-list>

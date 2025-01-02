@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,24 +6,22 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".ui.fragments.DashboardFragment">
-
+    <!-- Scroll View Content -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!-- Greeting Header -->
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="@string/greeting_place_holder"
             android:textColor="?attr/colorOnBackground"
             android:textSize="@dimen/_18ssp"
-            app:layout_constraintMarginStart="16@dimen/_sdp"
-            app:layout_constraintMarginTop="16@dimen/_sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Welcome, Hesham AbuShaban!" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Balance Overview -->
         <com.google.android.material.card.MaterialCardView
@@ -31,38 +29,42 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_160sdp"
             android:layout_margin="@dimen/_16sdp"
-            android:radius="@dimen/_16sdp"
+            android:radius="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_12sdp"
+            app:cardElevation="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvGreeting">
+            app:layout_constraintTop_toBottomOf="@id/tvGreeting"
+            app:strokeColor="?attr/colorPrimary"
+            app:strokeWidth="@dimen/_2sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvBalanceTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/your_balance"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Your Balance" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvBalanceAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/placeholder_amount_money"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="@dimen/_32ssp"
                     app:layout_constraintStart_toStartOf="@+id/tvBalanceTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBalanceTitle"
-                    tools:text="$25,552.92" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvBalanceTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,73 +75,175 @@
             android:id="@+id/llQuickActions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardBalance">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardTransfer"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:radius="@dimen/_12sdp">
+            <!-- First row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:orientation="horizontal">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTransfer"
+                    style="@style/SelectableItemBackgroundStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:radius="@dimen/_12sdp"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_16sdp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="@dimen/_2sdp">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:drawableTop="@drawable/ic_transfer"
-                        android:drawablePadding="@dimen/_8sdp"
-                        android:drawableTint="?attr/colorPrimary"
-                        android:text="@string/transfer"
-                        android:textAlignment="center"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="@dimen/_14ssp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:drawableTop="@drawable/ic_transfer_fit"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:text="@string/transfer"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardWithdraw"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_weight="1"
-                android:radius="@dimen/_12sdp">
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardWithdraw"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:radius="@dimen/_12sdp"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_16sdp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="@dimen/_2sdp">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:drawableTop="@drawable/ic_withdraw_fit"
-                        android:drawablePadding="@dimen/_8sdp"
-                        android:drawableTint="?attr/colorPrimary"
-                        android:text="@string/withdraw"
-                        android:textAlignment="center"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="@dimen/_14ssp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/SelectableItemBackgroundStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:drawableTop="@drawable/ic_withdraw_fit"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:text="@string/withdraw"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Second row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardLoan"
+                    style="@style/SelectableItemBackgroundStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:radius="@dimen/_12sdp"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_16sdp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="@dimen/_2sdp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:drawableTop="@drawable/ic_loan_fit"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:text="@string/loans"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:radius="@dimen/_12sdp"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_16sdp"
+                    app:strokeColor="?attr/colorPrimary"
+                    app:strokeWidth="@dimen/_2sdp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/SelectableItemBackgroundStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:drawableTop="@drawable/ic_pay_fit"
+                            android:drawablePadding="@dimen/_8sdp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:text="@string/pay"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/_14ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

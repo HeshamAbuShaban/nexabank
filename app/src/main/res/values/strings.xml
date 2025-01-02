@@ -24,5 +24,8 @@
     <string name="pay">Pay</string>
     <string name="add_new_loan">Add new loan</string>
     <string name="credit_card_details">Credit card details</string>
+    <string name="your_balance">Your Balance</string>
+    <string name="placeholder_amount_money">$25,552.92</string>
+    <string name="greeting_place_holder">Welcome, Hesham AbuShaban!</string>
 
 </resources>
