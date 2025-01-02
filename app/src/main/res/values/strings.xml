@@ -27,5 +27,6 @@
     <string name="your_balance">Your Balance</string>
     <string name="placeholder_amount_money">$25,552.92</string>
     <string name="greeting_place_holder">Welcome, Hesham AbuShaban!</string>
+    <string name="transaction_icon">Transaction icon</string>
 
 </resources>

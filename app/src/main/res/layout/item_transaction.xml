@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Icon -->
+    <ImageView
+        android:id="@+id/transaction_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="@string/transaction_icon"
+        android:src="@drawable/ic_transactions" />
+
+    <!-- Transaction Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/transaction_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Netflix Subscription"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/transaction_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dec 28, 2024"
+            android:textColor="?colorSecondary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Transaction Amount -->
+    <TextView
+        android:id="@+id/transaction_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- $15.99"
+        android:textColor="?colorError"
+        android:textSize="16sp" />
+</LinearLayout>

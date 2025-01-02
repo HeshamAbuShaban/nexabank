@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardElevation="@dimen/_6sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_16sdp">
+
+        <TextView
+            android:id="@+id/loan_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Loan"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/loan_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$12,500"
+            android:textColor="?colorPrimary"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/loan_progress"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="60"
+                android:progressTint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/loan_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="60% Paid"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
