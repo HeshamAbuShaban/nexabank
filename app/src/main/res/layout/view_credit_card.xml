@@ -40,7 +40,7 @@
                     android:src="@drawable/ic_chip_fit" />
 
                 <TextView
-                    android:id="@+id/visa_logo_tv"
+                    android:id="@+id/cardType_logo_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"

@@ -15,14 +15,27 @@
             android:id="@+id/creditCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_4sdp"
             app:cardHolderName="Hesham AbuShaban"
             app:cardNumber="1234 5678 9012 3456"
             app:expiryDate="12/25"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- User's Credit Cards -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCreditCards"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/creditCardView"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_credit_card" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

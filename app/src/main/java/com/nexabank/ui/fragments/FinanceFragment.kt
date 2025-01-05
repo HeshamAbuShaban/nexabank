@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nexabank.adapters.TabPagerAdapter
 import com.nexabank.databinding.FragmentFinanceBinding
+import com.nexabank.util.DepthPageTransformer
 
 class FinanceFragment : Fragment() {
     private lateinit var binding: FragmentFinanceBinding
@@ -39,6 +40,7 @@ class FinanceFragment : Fragment() {
 
         with(binding.viewPagerFinance) {
             adapter = TabPagerAdapter(requireParentFragment(), fragmentList)
+            setPageTransformer(DepthPageTransformer())
             currentItem = 0
         }
 

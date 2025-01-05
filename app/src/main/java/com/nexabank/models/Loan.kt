@@ -10,6 +10,9 @@ data class Loan(
     var repaymentPeriod: Int, // in months
     var status: LoanStatus = LoanStatus.PENDING,
     val requestDate: String,
-    var approvedDate: LocalDateTime? = null
+    var approvedDate: LocalDateTime? = null,
+    var repaymentDate: LocalDateTime? = null,
+    var remainingBalance: Double? = amount,
+    val dueDate: LocalDateTime?
 )
 

@@ -41,5 +41,5 @@
         android:layout_height="match_parent"
         android:padding="@dimen/_8sdp"
         tools:itemCount="10"
-        tools:listitem="@android:layout/expandable_list_content" />
+        tools:listitem="@layout/item_transaction" />
 </LinearLayout>

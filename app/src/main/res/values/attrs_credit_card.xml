@@ -2,6 +2,7 @@
     <declare-styleable name="CreditCardView">
         <attr name="cardNumber" format="string" />
         <attr name="cardHolderName" format="string" />
+        <attr name="cardType" format="string" />
         <attr name="expiryDate" format="string" />
         <attr name="cardBackgroundColor" format="color" />
         <attr name="cardCornerRadius" format="dimension" />

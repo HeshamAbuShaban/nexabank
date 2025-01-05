@@ -1,58 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_8sdp"
+    android:layout_margin="@dimen/_4sdp"
     app:cardCornerRadius="@dimen/_12sdp"
     app:cardElevation="@dimen/_6sdp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_16sdp">
+        android:padding="@dimen/_12sdp">
 
+        <!-- Loan Amount -->
         <TextView
-            android:id="@+id/loan_title"
+            android:id="@+id/tvLoanAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Car Loan"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:text="$5,000.00"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- Loan Status -->
         <TextView
-            android:id="@+id/loan_amount"
+            android:id="@+id/tvLoanStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$12,500"
-            android:textColor="?colorPrimary"
-            android:textSize="16sp" />
+            android:text="Active"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Remaining Balance -->
+        <TextView
+            android:id="@+id/tvRemainingBalance"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:text="Remaining: $3,000.00"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintTop_toBottomOf="@id/tvLoanAmount"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/loan_progress"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_8sdp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="60"
-                android:progressTint="?colorPrimary" />
-
-            <TextView
-                android:id="@+id/loan_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:text="60% Paid"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
+        <!-- Due Date -->
+        <TextView
+            android:id="@+id/tvDueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Due: Jan 15, 2025"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/tvLoanStatus"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,12 +1,13 @@
 package com.nexabank.ui.views
 
 import android.content.Context
-import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.core.content.withStyledAttributes
 import com.nexabank.R
 import com.nexabank.databinding.ViewCreditCardBinding
+import com.nexabank.util.flipCard
 
 class CreditCardView @JvmOverloads constructor(
     context: Context,
@@ -17,55 +18,36 @@ class CreditCardView @JvmOverloads constructor(
     private val binding: ViewCreditCardBinding =
         ViewCreditCardBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var cardNumber: String? = null
-        set(value) {
-            field = value
-            binding.cardNumberTv.text = value
-        }
 
-    private var cardHolderName: String? = null
+    private var cardInfo: CardInfo = CardInfo(context) // Initialize with default values
         set(value) {
             field = value
-            binding.cardHolderNameTv.text = value
-        }
-
-    private var expiryDate: String? = null
-        set(value) {
-            field = value
-            binding.tvExpiryDate.text = value
+            with(binding) {
+                cardNumberTv.text = value.cardNumber
+                cardHolderNameTv.text = value.cardHolderName
+                tvExpiryDate.text = value.expiryDate
+                cardTypeLogoTv.text = value.cardType
+            }
         }
 
     init {
-        // Load attributes (if any)
-        attrs?.let {
-            val typedArray =
-                context.obtainStyledAttributes(it, R.styleable.CreditCardView, defStyleAttr, 0)
-            // Retrieve custom attributes here (if defined)
-            cardNumber = typedArray.getString(R.styleable.CreditCardView_cardNumber)
-            cardHolderName = typedArray.getString(R.styleable.CreditCardView_cardHolderName)
-            expiryDate = typedArray.getString(R.styleable.CreditCardView_expiryDate)
-            typedArray.recycle()
-
-            // Set initial values (if any)
-            with(binding) {
-                cardNumberTv.text = cardNumber
-                cardHolderNameTv.text = cardHolderName
-                tvExpiryDate.text = expiryDate
-                /*cardChip.setImageResource(R.drawable.ic_chip_fit)
-                visaLogoTv.text = context.getString(R.string.visa)
-                cardContainer.setBackgroundResource(R.drawable.shape_gradient_background)
-                cardContainer.alpha = 0.5f
-                cardContainer.translationY = 200f*/
-                motionLayout.transitionToStart()
-                Handler(context.mainLooper).postDelayed({
-                    motionLayout.transitionToEnd()
-                }, 700)
-            }
-        } ?: {
-            // Set initial values (if any)
-            cardNumber = context.getString(R.string.placeholder_card_number)
-            cardHolderName = context.getString(R.string.placeholder_name)
-            expiryDate = context.getString(R.string.placeholder_expire_date)
+        context.withStyledAttributes(attrs, R.styleable.CreditCardView, defStyleAttr, 0) {
+            cardInfo = CardInfo(
+                cardNumber = getString(R.styleable.CreditCardView_cardNumber),
+                cardHolderName = getString(R.styleable.CreditCardView_cardHolderName),
+                cardType = getString(R.styleable.CreditCardView_cardType),
+                expiryDate = getString(R.styleable.CreditCardView_expiryDate),
+                context = context
+            )
+            flipCard(this@CreditCardView)
         }
     }
 }
+
+data class CardInfo(
+    val context: Context,
+    val cardNumber: String? = context.getString(R.string.placeholder_card_number),
+    val cardHolderName: String? = context.getString(R.string.placeholder_name),
+    val expiryDate: String? = context.getString(R.string.placeholder_expire_date),
+    val cardType: String? = context.getString(R.string.visa)
+)
