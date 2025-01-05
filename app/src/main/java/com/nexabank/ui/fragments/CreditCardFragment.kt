@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import com.nexabank.R
 import com.nexabank.databinding.FragmentCreditCardBinding
+import com.nexabank.util.flipCard
 
 class CreditCardFragment : Fragment() {
     private lateinit var binding: FragmentCreditCardBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreditCardBinding.inflate(inflater, container, false)
         return binding.root
@@ -25,6 +26,6 @@ class CreditCardFragment : Fragment() {
     }
 
     private fun init() {
-
+        flipCard(binding.creditCardView)
     }
 }

@@ -25,6 +25,6 @@ class DashboardFragment:Fragment() {
     }
 
     private fun init() {
-
+//        binding.card.motionLayout.transitionToEnd()
     }
 }

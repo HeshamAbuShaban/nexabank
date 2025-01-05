@@ -11,37 +11,37 @@
         android:id="@+id/registerCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_12sdp"
-        app:cardCornerRadius="@dimen/_24sdp"
         android:layout_margin="@dimen/_16sdp"
-        app:strokeColor="?attr/colorPrimary"
-        app:strokeWidth="@dimen/_2sdp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="@dimen/_24sdp"
+        app:cardElevation="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="?attr/colorPrimary"
+        app:strokeWidth="@dimen/_2sdp">
 
         <!-- Card Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/_24sdp"
-            android:layout_gravity="center">
+            android:padding="@dimen/_24sdp">
 
             <!-- App Logo (Optional) -->
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@mipmap/ic_launcher"
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/the_app_logo" />
+                android:contentDescription="@string/the_app_logo"
+                android:src="@mipmap/ic_launcher"
+                app:roundPercent="25" />
 
             <!-- Username Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="Enter your username"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -49,7 +49,6 @@
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_your_username"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +56,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+
                 app:helperText="Enter your email address"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -66,7 +65,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/enter_your_email"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +72,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+
                 app:helperText="Enter your password"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -83,7 +81,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="@string/enter_your_password"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +88,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+
                 app:helperText="Enter your balance"
                 app:helperTextTextColor="?attr/colorOnSurface">
 
@@ -100,7 +97,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:hint="@string/do_you_have_an_initial_balance"
                     android:textColor="?attr/colorOnSurface" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,13 +105,26 @@
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/register"
                 android:textColor="?attr/colorOnPrimary"
+                app:backgroundTint="?attr/colorPrimary"
                 app:cornerRadius="@dimen/_16sdp"
                 app:icon="@drawable/ic_account_balance"
-                app:iconPadding="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                app:backgroundTint="?attr/colorPrimary"/>
+                app:iconPadding="@dimen/_8sdp" />
+
+            <!-- Have Account -->
+            <TextView
+                android:id="@+id/haveAccount"
+                style="@style/SelectableItemBackgroundStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:text="@string/you_have_an_account"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

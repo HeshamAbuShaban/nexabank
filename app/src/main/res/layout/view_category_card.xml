@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/SelectableItemBackgroundStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_35sdp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="@dimen/_5sdp"
+    app:strokeColor="?attr/colorPrimary"
+    app:strokeWidth="@dimen/_1sdp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sccTV"
+        style="@style/MusicSubtitleText"
+        android:fontFamily="@font/inter_thin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_25sdp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableTint="?attr/colorPrimary"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/_10ssp" />
+
+</com.google.android.material.card.MaterialCardView>

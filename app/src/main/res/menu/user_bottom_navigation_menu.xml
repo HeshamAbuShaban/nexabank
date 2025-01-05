@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/dashboard_destination"
-        android:icon="@drawable/ic_dashboard"
+        android:icon="@drawable/ic_menu_fit"
         android:orderInCategory="1"
         android:title="@string/dashboard" />
 
-    <item
+    <!--<item
         android:id="@+id/transaction_destination"
         android:icon="@drawable/ic_transactions"
         android:orderInCategory="2"
@@ -17,12 +17,12 @@
         android:id="@+id/loan_destination"
         android:icon="@drawable/ic_loans"
         android:orderInCategory="3"
-        android:title="@string/loans" />
+        android:title="@string/loans" />-->
 
-    <item android:id="@+id/credit_card_destination"
-        android:icon="@drawable/ic_credit_card"
-        android:orderInCategory="4"
-        android:title="@string/credit_cards" />
+    <item android:id="@+id/finance_destination"
+        android:icon="@drawable/ic_account_balance"
+        android:orderInCategory="2"
+        android:title="@string/finance" />
 
     <item
         android:id="@+id/settings_destination"

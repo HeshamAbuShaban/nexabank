@@ -8,7 +8,7 @@
     <string name="credit_cards">Credit Cards</string>
     <!--Hint Text-->
     <string name="enter_your_email">Enter your email</string>
-    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_password">Your password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="the_app_logo">The App Logo</string>
@@ -28,5 +28,16 @@
     <string name="placeholder_amount_money">$25,552.92</string>
     <string name="greeting_place_holder">Welcome, Hesham AbuShaban!</string>
     <string name="transaction_icon">Transaction icon</string>
+    <string name="visa">Visa</string>
+    <string name="placeholder_card_number">**** **** **** 1234</string>
+    <string name="placeholder_name">Hesham Bakr</string>
+    <string name="your_username">Your username</string>
+    <string name="placeholder_expire_date">08/28</string>
+    <string name="deposit">Deposit</string>
+    <string name="recent_transactions">Recent transactions</string>
+    <string name="money_placeholder">$12,345.67</string>
+    <string name="current_balance">Current balance</string>
+    <string name="finance">Finance</string>
+    <string name="you_have_an_account">You have an account?</string>
 
 </resources>
