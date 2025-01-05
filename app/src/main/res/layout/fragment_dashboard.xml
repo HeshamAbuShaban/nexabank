@@ -11,18 +11,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!-- Greeting Section -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/greetingTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/placeholder_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/_24ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!-- Balance Card -->
+        <include
+            android:id="@+id/balanceAndRecentTransaction"
+            layout="@layout/item_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greetingTV" />
+
         <!-- Quick Actions -->
         <LinearLayout
             android:id="@+id/llQuickActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/balanceAndRecentTransaction">
 
             <!-- first row -->
             <LinearLayout
