@@ -5,6 +5,7 @@ import com.nexabank.models.dto.TransferRequest
 import com.nexabank.models.enums.TransactionStatus
 import com.nexabank.repositories.TransactionRepository
 import com.nexabank.repositories.UserRepository
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
@@ -62,5 +63,12 @@ class AccountService(
         // Save Updated Users
         userRepository.save(sender)
         userRepository.save(recipient)
+    }
+
+    @Cacheable("userBalanceCache") // Cache to reduce repetitive queries
+    fun getBalance(username: String): Double {
+        val user = userRepository.findByUsername(username)
+            ?: throw IllegalArgumentException("User not found")
+        return user.balance
     }
 }

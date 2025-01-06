@@ -58,4 +58,27 @@ class AccountController(
         accountService.transferFunds(username, transferRequest)
         return ResponseEntity.ok("Transfer successful.")
     }
+
+    /*@ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @GetMapping("/balance")
+    fun getUserBalance(@RequestParam username: String): ResponseEntity<Map<String, Any>> {
+        val balance = accountService.getBalance(username)
+        return ResponseEntity.ok(
+            mapOf(
+                "balance" to balance,
+                "currency" to "USD" // Hardcoded for now, could be dynamic
+            )
+        )
+    }*/
+
+    @Operation(
+        summary = "Get Balance",
+        description = "It fetch user's balance"
+    )
+    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @GetMapping("/{username}/balance")
+    fun getUserBalance(@PathVariable username: String): ResponseEntity<Double> {
+        val balance = accountService.getBalance(username)
+        return ResponseEntity.ok(balance)
+    }
 }
