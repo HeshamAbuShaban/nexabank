@@ -39,5 +39,6 @@
     <string name="current_balance">Current balance</string>
     <string name="finance">Finance</string>
     <string name="you_have_an_account">You have an account?</string>
+    <string name="to_be_decide">To Be Decide…</string>
 
 </resources>

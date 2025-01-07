@@ -4,11 +4,11 @@
     android:id="@+id/cardSnapshot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp"
-    app:cardCornerRadius="@dimen/_16sdp"
+    android:layout_margin="@dimen/_15sdp"
+    app:cardCornerRadius="@dimen/_12sdp"
     app:cardElevation="@dimen/_8sdp"
     app:strokeColor="?attr/colorPrimary"
-    app:strokeWidth="@dimen/_2sdp">
+    app:strokeWidth="@dimen/_1sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:text="@string/money_placeholder"
+            android:text="@string/to_be_decide"
             android:textColor="?attr/colorPrimary"
             android:textSize="@dimen/_24ssp"
             android:textStyle="bold" />

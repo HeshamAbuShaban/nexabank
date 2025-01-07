@@ -6,13 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiService {
-    private const val BASE_URL = "https://localhost:8080/api/" // Replace with your actual base URL.
+    private const val BASE_URL = "http://192.168.100.11:8080/api/" // Replace with your actual base URL.
 
     // Build OkHttpClient with interceptors
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(SecureHeadersInterceptor()) // Custom headers interceptor
             .build()
     }
