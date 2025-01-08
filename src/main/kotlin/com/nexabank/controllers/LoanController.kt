@@ -19,7 +19,7 @@ class LoanController(private val loanService: LoanService) {
         summary = "Request a loan",
         description = "Submit a loan request specifying the amount and repayment period."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/request")
     fun requestLoan(
         @PathVariable username: String,
@@ -47,7 +47,7 @@ class LoanController(private val loanService: LoanService) {
         summary = "Repay a loan",
         description = "Deduct the repayment amount from the user's balance for the specified loan."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/loans/{loanId}/repay")
     fun repayLoan(
         @PathVariable username: String,

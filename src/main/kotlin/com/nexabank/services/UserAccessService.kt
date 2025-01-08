@@ -8,20 +8,32 @@ import org.springframework.stereotype.Service
 @Service
 class UserAccessService {
     private val logger = LoggerFactory.getLogger(UserAccessService::class.java)
-    fun validateUserAccess(targetUsername: String, requiredRole: String? = null) {
-        val auth = SecurityContextHolder.getContext().authentication
-        val loggedInUsername = auth.name
 
-        if (targetUsername != loggedInUsername) {
-            logger.warn("Unauthorized access attempt: User [$loggedInUsername] tried to access [$targetUsername]'s resources.")
+    fun getCurrentUsername(): String {
+        val auth = SecurityContextHolder.getContext().authentication
+        return auth.name
+    }
+
+    fun getCurrentUserRole(): String {
+        val auth = SecurityContextHolder.getContext().authentication
+        return auth.authorities.firstOrNull()?.authority
+            ?: throw AccessDeniedException("No role associated with the current user.")
+    }
+
+    fun validateUserAccess(targetUsername: String, requiredRoles: List<String> = emptyList()) {
+        val currentUsername = getCurrentUsername()
+        val currentUserRole = getCurrentUserRole()
+
+        // Check if the user is accessing their own resources
+        if (targetUsername != currentUsername && currentUserRole != "ROLE_ADMIN") {
+            logger.warn("Unauthorized access attempt: User [$currentUsername] tried to access [$targetUsername]'s resources.")
             throw AccessDeniedException("Unauthorized access to the requested resource.")
         }
 
-        requiredRole?.let {
-            if (auth.authorities.none { it.authority == requiredRole }) {
-                logger.warn("Insufficient permissions: User [$loggedInUsername] lacks [$requiredRole] role.")
-                throw AccessDeniedException("User lacks the required role: $requiredRole")
-            }
+        // Check for required roles
+        if (requiredRoles.isNotEmpty() && currentUserRole !in requiredRoles) {
+            logger.warn("Insufficient permissions: User [$currentUsername] lacks the required roles: $requiredRoles.")
+            throw AccessDeniedException("User lacks the required roles: $requiredRoles")
         }
     }
 }

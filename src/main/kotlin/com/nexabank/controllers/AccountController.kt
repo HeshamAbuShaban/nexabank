@@ -6,7 +6,9 @@ import com.nexabank.models.dto.DepositRequest
 import com.nexabank.models.dto.WithdrawRequest
 import com.nexabank.services.AccountService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
+import io.swagger.v3.oas.models.media.Content
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -21,7 +23,7 @@ class AccountController(
         summary = "Deposit funds",
         description = "Deposit money into the user's account."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/deposit")
     fun depositFunds(
         @PathVariable username: String,
@@ -35,7 +37,7 @@ class AccountController(
         summary = "Withdraw funds",
         description = "Withdraw money from the user's account."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/withdraw")
     fun withdrawFunds(
         @PathVariable username: String,
@@ -49,7 +51,7 @@ class AccountController(
         summary = "Transfer funds",
         description = "Transfer funds between your account and another user."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/transfer")
     fun transferFunds(
         @PathVariable username: String,
@@ -59,7 +61,7 @@ class AccountController(
         return ResponseEntity.ok("Transfer successful.")
     }
 
-    /*@ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    /*@ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @GetMapping("/balance")
     fun getUserBalance(@RequestParam username: String): ResponseEntity<Map<String, Any>> {
         val balance = accountService.getBalance(username)
@@ -72,10 +74,26 @@ class AccountController(
     }*/
 
     @Operation(
-        summary = "Get Balance",
-        description = "It fetch user's balance"
+        summary = "Get user balance",
+        description = """
+        Fetch the current balance for the specified user.
+        - ROLE_USER: Can only fetch their own balance.
+        - ROLE_ADMIN: Can fetch the balance for any user.
+    """
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ApiResponse(
+        responseCode = "200",
+        description = "Balance fetched successfully",
+    )
+    @ApiResponse(
+        responseCode = "403",
+        description = "Forbidden - Access denied"
+    )
+    @ApiResponse(
+        responseCode = "404",
+        description = "User not found"
+    )
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @GetMapping("/{username}/balance")
     fun getUserBalance(@PathVariable username: String): ResponseEntity<Double> {
         val balance = accountService.getBalance(username)

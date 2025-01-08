@@ -16,7 +16,7 @@ class CreditCardController(private val cardService: CreditCardService) {
         summary = "Generate a virtual card",
         description = "Create a virtual credit card for secure online transactions."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PostMapping("/{username}/generate")
     fun generateCard(@PathVariable username: String): ResponseEntity<String> {
         cardService.generateCard(username)
@@ -27,7 +27,7 @@ class CreditCardController(private val cardService: CreditCardService) {
         summary = "Freeze or unfreeze a card",
         description = "Toggle the freeze status of a credit card."
     )
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     @PutMapping("/{username}/{cardId}/toggle")
     fun toggleCardFreeze(@PathVariable username: String, @PathVariable cardId: Long): ResponseEntity<String> {
         cardService.toggleFreeze(username, cardId)

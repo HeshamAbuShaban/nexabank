@@ -46,7 +46,7 @@ class TransactionController(
         description = "Fetch categorized spending insights based on transaction history."
     )
     @GetMapping("/{username}/spending-insights")
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     fun getSpendingInsights(@PathVariable username: String): ResponseEntity<SpendingInsights> {
         return ResponseEntity.ok(transactionService.getSpendingInsights(username))
     }

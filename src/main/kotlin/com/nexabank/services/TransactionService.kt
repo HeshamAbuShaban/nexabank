@@ -76,7 +76,7 @@ class TransactionService(
         }
     }
 
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     fun getSpendingInsights(username: String): SpendingInsights {
         val user = userRepository.findByUsername(username)
             ?: throw IllegalArgumentException("User not found")
@@ -99,7 +99,7 @@ class TransactionService(
         return transactionRepository.save(transaction)
     }
 
-    @ValidateAccess(requireRole = "ROLE_USER", checkCurrentUser = true)
+    @ValidateAccess(requireRole = ["ROLE_USER"], checkCurrentUser = true)
     fun getTransactionHistory(
         username: String,
         page: Int? = null,
