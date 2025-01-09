@@ -11,7 +11,7 @@ object TokenManager {
 
     private val sharedPreferences: AppSharedPreferences by lazy {
         val entryPoint = EntryPointAccessors.fromApplication(
-            NexaBankApp().applicationContext, // Pass the application context
+            NexaBankApp.instance.applicationContext, // Pass the application context
             AppSharedPreferencesEntryPoint::class.java
         )
         entryPoint.getAppSharedPreferences()

@@ -1,6 +1,8 @@
 package com.nexabank.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +30,9 @@ class CreditCardFragment : Fragment() {
     }
 
     private fun init() {
+        binding.motionLayout.transitionToStart()
         setupRV()
+        setupCCardDummyInfo()
     }
 
     private fun setupRV() {
@@ -76,5 +80,17 @@ class CreditCardFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
+    }
+
+    private fun setupCCardDummyInfo() {
+        with(binding.creditCardView) {
+            setCardHolderName("Hesham AbuShaban")
+            setCardNumber("1234 5678 9012 3456")
+            setExpiryDate("12/25")
+            setCardType(CardType.Visa.name)
+        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.motionLayout.transitionToEnd()
+        }, 580)
     }
 }

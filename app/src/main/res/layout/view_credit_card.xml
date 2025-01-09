@@ -1,95 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_16sdp">
+    android:layout_margin="@dimen/_16sdp"
+    app:cardCornerRadius="@dimen/_16sdp"
+    app:cardElevation="@dimen/_8sdp"
+    app:strokeColor="?colorPrimary"
+    app:strokeWidth="@dimen/_1sdp"
+    tools:context=".ui.views.CreditCardView">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motionLayout"
+    <!-- Background -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutDescription="@xml/motion_scene_credit_card">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_2sdp"
+        android:background="@drawable/shape_gradient_background">
 
-
-        <!-- Card Placeholder -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardContainer"
-            android:layout_width="match_parent"
+        <!-- Chip Icon -->
+        <ImageView
+            android:id="@+id/card_chip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_16sdp"
-            app:cardCornerRadius="@dimen/_16sdp"
-            app:cardElevation="@dimen/_8sdp"
-            app:strokeColor="?colorPrimary"
-            app:strokeWidth="@dimen/_2sdp">
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_chip_fit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Background -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_gradient_background">
+        <TextView
+            android:id="@+id/cardType_logo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_14sdp"
+            android:fontFamily="@font/inter_regular"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/visa"
+            android:textColor="#FFB300"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
 
-                <!-- Chip Icon -->
-                <ImageView
-                    android:id="@+id/card_chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_16sdp"
-                    android:contentDescription="@string/settings"
-                    android:src="@drawable/ic_chip_fit" />
+        <!-- Card Number -->
+        <TextView
+            android:id="@+id/card_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/placeholder_card_number"
+            android:textColor="@color/md_theme_primaryFixed"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/cardType_logo_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/_14sdp"
-                    android:fontFamily="@font/inter_regular"
-                    android:padding="2dp"
-                    android:text="@string/visa"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16ssp"
-                    tools:ignore="RelativeOverlap" />
+        <!-- Holder Name -->
+        <TextView
+            android:id="@+id/card_holder_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_55sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/placeholder_name"
+            android:textColor="@color/md_theme_primaryFixed"
+            android:textSize="@dimen/_7ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_number_tv" />
 
-                <!-- Card Number -->
-                <TextView
-                    android:id="@+id/card_number_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/placeholder_card_number"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold" />
-
-                <!-- Holder Name -->
-                <TextView
-                    android:id="@+id/card_holder_name_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    android:text="@string/placeholder_name"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_10ssp" />
-
-                <!-- Expiry Date -->
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvExpiryDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    android:text="@string/placeholder_expire_date"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp"
-                    tools:ignore="RelativeOverlap" />
-            </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.motion.widget.MotionLayout>
-</FrameLayout>
+        <!-- Expiry Date -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvExpiryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/placeholder_expire_date"
+            android:textColor="@color/md_theme_primaryFixed"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="BalanceCard">
+        <attr name="value" format="string" />
+    </declare-styleable>
+</resources>

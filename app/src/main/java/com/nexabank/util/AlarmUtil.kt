@@ -15,6 +15,12 @@ object AlarmUtil {
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
     }
+    // Get current time
+    fun getCurrentTime(): String {
+        val currentTime = System.currentTimeMillis()
+        val timeFormat = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault())
+        return timeFormat.format(currentTime)
+    }
 
 
 }

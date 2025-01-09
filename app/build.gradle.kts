@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.core.splashscreen)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.security.crypto)
 
     // Testing
     testImplementation(libs.junit)
@@ -72,6 +74,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit2.converter.scalars)
 
     // OkHttp3
     implementation(libs.okhttp)

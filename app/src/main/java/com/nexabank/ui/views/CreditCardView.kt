@@ -7,7 +7,6 @@ import android.widget.FrameLayout
 import androidx.core.content.withStyledAttributes
 import com.nexabank.R
 import com.nexabank.databinding.ViewCreditCardBinding
-import com.nexabank.util.flipCard
 
 class CreditCardView @JvmOverloads constructor(
     context: Context,
@@ -39,8 +38,25 @@ class CreditCardView @JvmOverloads constructor(
                 expiryDate = getString(R.styleable.CreditCardView_expiryDate),
                 context = context
             )
-            flipCard(this@CreditCardView)
+//            flipCard(binding.root)
         }
+    }
+
+    // setter for attrs of this view
+    fun setCardHolderName(name: String) {
+        cardInfo = cardInfo.copy(cardHolderName = name)
+    }
+
+    fun setCardNumber(number: String) {
+        cardInfo = cardInfo.copy(cardNumber = number)
+    }
+
+    fun setExpiryDate(date: String) {
+        cardInfo = cardInfo.copy(expiryDate = date)
+    }
+
+    fun setCardType(type: String) {
+        cardInfo = cardInfo.copy(cardType = type)
     }
 }
 

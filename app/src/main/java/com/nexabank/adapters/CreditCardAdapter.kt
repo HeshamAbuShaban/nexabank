@@ -14,7 +14,6 @@ import com.nexabank.models.CreditCard
  * **Important:** To handle item clicks, you must call `setOnItemClickListener` and provide a listener.
  */
 class CreditCardAdapter : RecyclerView.Adapter<CreditCardAdapter.CreditCardViewHolder>() {
-    private lateinit var binding: ItemCreditCardBinding
     private val differ = AsyncListDiffer(this, CreditCardDiffCallback)
 
     var cards: MutableList<CreditCard>
@@ -32,7 +31,7 @@ class CreditCardAdapter : RecyclerView.Adapter<CreditCardAdapter.CreditCardViewH
     /**
      * Sets the click listener for credit card items.
      *
-     * @param listener The listener to be invoked when a credit card item is clicked.
+     * @onItemClick The listener to be invoked when a credit card item is clicked.
      */
     private lateinit var onItemClick: (CreditCard) -> Unit
     fun setOnItemClickListener(listener: (CreditCard) -> Unit) {

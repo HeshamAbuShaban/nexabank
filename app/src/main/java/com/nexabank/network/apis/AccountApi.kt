@@ -13,13 +13,13 @@ interface AccountApi {
     suspend fun depositFunds(
         @Path("username") username: String,
         @Body request: DepositRequest
-    ): Response<Unit>
+    ): Response<String>
 
     @POST("accounts/{username}/withdraw")
     suspend fun withdrawFunds(
         @Path("username") username: String,
         @Body request: WithdrawRequest
-    ): Response<Unit>
+    ): Response<String>
 
     @GET("accounts/{username}/balance")
     suspend fun getBalance(

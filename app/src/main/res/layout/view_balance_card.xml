@@ -4,11 +4,11 @@
     android:id="@+id/cardSnapshot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_15sdp"
-    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardCornerRadius="@dimen/_7sdp"
     app:cardElevation="@dimen/_8sdp"
     app:strokeColor="?attr/colorPrimary"
-    app:strokeWidth="@dimen/_1sdp">
+    app:strokeWidth="@dimen/_1sdp"
+    tools:context=".ui.views.BalanceCard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,6 +36,7 @@
             android:textStyle="bold" />
 
         <!-- Recent Transactions -->
+        <!--
         <TextView
             android:id="@+id/tvRecentTransactions"
             android:layout_width="wrap_content"
@@ -52,5 +53,6 @@
             android:layout_marginTop="@dimen/_8sdp"
             tools:itemCount="3"
             tools:listitem="@layout/item_transaction" />
+        -->
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

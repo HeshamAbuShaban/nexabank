@@ -10,19 +10,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutDescription="@xml/motion_scene_credit_card">
+
         <!-- Credit Card Section -->
         <com.nexabank.ui.views.CreditCardView
             android:id="@+id/creditCardView"
+            android:layout_margin="@dimen/_8sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_8sdp"
-            app:cardElevation="@dimen/_4sdp"
-            app:cardHolderName="Hesham AbuShaban"
-            app:cardNumber="1234 5678 9012 3456"
-            app:expiryDate="12/25"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
 
         <!-- User's Credit Cards -->
         <androidx.recyclerview.widget.RecyclerView
@@ -33,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/creditCardView"
+            app:layout_constraintTop_toBottomOf="@id/motionLayout"
             tools:itemCount="3"
             tools:listitem="@layout/item_credit_card" />
 

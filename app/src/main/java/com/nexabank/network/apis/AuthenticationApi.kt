@@ -18,13 +18,13 @@ interface AuthenticationApi {
     }
     * */
     @POST("auth/register")
-    suspend fun register(@Body request: UserRequest): Response<Unit>
+    suspend fun register(@Body request: UserRequest): Response<String>
 
     @POST("auth/login")
     suspend fun login(
         @Body request: UserRequest // e.g., username, password
-    ): Response<Map<String, String>> // Token in response
+    ): Response<String> // Token in response
 
     @POST("auth/logout")
-    suspend fun logout(): Response<Unit>
+    suspend fun logout(): Response<String>
 }

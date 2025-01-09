@@ -2,6 +2,7 @@ package com.nexabank.core
 
 import android.content.SharedPreferences
 import com.nexabank.core.Keys.TOKEN_PREF
+import com.nexabank.core.Keys.USERNAME_PREF
 import javax.inject.Inject
 
 /**
@@ -31,6 +32,29 @@ class AppSharedPreferences @Inject constructor(private val sharedPreferences: Sh
     fun removeToken() {
         editor.apply {
             remove(TOKEN_PREF)
+            apply()
+        }
+    }
+
+    // Username
+    fun saveUsername(username: String) {
+        editor.apply {
+            putString(USERNAME_PREF, username)
+            apply()
+        }
+    }
+
+    fun getUsername(): String? {
+        return sharedPreferences.getString(USERNAME_PREF, null)
+    }
+
+    fun containsUsername(): Boolean {
+        return sharedPreferences.contains(USERNAME_PREF)
+    }
+
+    fun removeUsername() {
+        editor.apply {
+            remove(USERNAME_PREF)
             apply()
         }
     }

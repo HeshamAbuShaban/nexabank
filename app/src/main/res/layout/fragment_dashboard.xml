@@ -1,52 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:barrierAllowsGoneWidgets="true"
+    app:barrierDirection="top"
+    app:barrierMargin="@dimen/_8sdp"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.DashboardFragment">
+
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:contentDescription="@string/recent_transactions"
-    android:fillViewport="true"
-    tools:context=".ui.fragments.DashboardFragment">
+    android:fillViewport="true">
     <!-- Scroll View Content -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
         <!-- Greeting Section -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/greetingTV"
+            style="@style/MusicSubtitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
+            android:layout_margin="@dimen/_12sdp"
             android:padding="@dimen/_10sdp"
             android:text="@string/placeholder_name"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/_24ssp"
+            android:textSize="@dimen/_19ssp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Balance Card -->
-        <include
-            android:id="@+id/balanceAndRecentTransaction"
-            layout="@layout/item_header"
+
+
+            <!-- Balance Card -->
+        <com.nexabank.ui.views.BalanceCard
+            android:id="@+id/balanceCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/greetingTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <!-- Title QA -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/titleQuickAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quick_actions"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textColor="?colorPrimaryFixed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/greetingTV" />
+            app:layout_constraintTop_toBottomOf="@id/balanceCard" />
 
         <!-- Quick Actions -->
         <LinearLayout
             android:id="@+id/llQuickActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/balanceAndRecentTransaction">
+            app:layout_constraintTop_toBottomOf="@id/titleQuickAction">
 
             <!-- first row -->
             <LinearLayout
@@ -129,4 +159,4 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</ScrollView></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
