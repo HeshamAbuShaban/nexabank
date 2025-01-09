@@ -18,7 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- User Info -->
         <LinearLayout
+            android:id="@+id/llUserInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -28,29 +30,99 @@
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hesham Bakr"
+                android:text="@string/placeholder_name"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="@dimen/_18ssp"
+                android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hesham@example.com"
+                android:text="@string/placeholder_email"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="@dimen/_14ssp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Settings List
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSettings"
+    <!-- Scroll View -->
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollIndicators="none"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardUserInfo" />
-         -->
+        app:layout_constraintEnd_toEndOf="@id/cardUserInfo"
+        app:layout_constraintStart_toStartOf="@id/cardUserInfo"
+        app:layout_constraintTop_toBottomOf="@id/cardUserInfo">
+        <!-- Scroll View Content -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Change Password Card -->
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:logo="@android:drawable/ic_lock_lock"
+                app:title="Change your password" />
+
+            <!-- Change Email Card -->
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardChangeEmail"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@id/cardChangePassword"
+                app:layout_constraintStart_toStartOf="@id/cardChangePassword"
+                app:layout_constraintTop_toBottomOf="@id/cardChangePassword"
+                app:logo="@android:drawable/ic_dialog_email"
+                app:title="Change your email" />
+
+            <!-- Contact Us Card -->
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardContactUs"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@id/cardChangeEmail"
+                app:layout_constraintStart_toStartOf="@id/cardChangeEmail"
+                app:layout_constraintTop_toBottomOf="@id/cardChangeEmail"
+                app:logo="@android:drawable/stat_sys_phone_call"
+                app:title="Contact us" />
+
+            <!-- Print Info Card -->
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardPrintInfo"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@id/cardContactUs"
+                app:layout_constraintStart_toStartOf="@id/cardContactUs"
+                app:layout_constraintTop_toBottomOf="@id/cardContactUs"
+                app:logo="@android:drawable/ic_dialog_info"
+                app:title="Print your Data" />
+
+            <!-- Print Info Card -->
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardLogout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:foregroundTint="@color/md_theme_error"
+                app:layout_constraintEnd_toEndOf="@id/cardPrintInfo"
+                app:layout_constraintStart_toStartOf="@id/cardPrintInfo"
+                app:layout_constraintTop_toBottomOf="@id/cardPrintInfo"
+                app:logo="@drawable/ic_login"
+                app:title="Logout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,6 @@ class CategoryCard @JvmOverloads constructor(
 
         typedArray.recycle()
     }
+
+    fun setOnClickListener(listener: () -> Unit) = binding.root.setOnClickListener { listener() }
 }

@@ -1,10 +1,14 @@
 package com.nexabank.ui.vms
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.viewbinding.ViewBinding
 import com.nexabank.core.AppSharedPreferences
 import com.nexabank.databinding.FragmentDashboardBinding
+import com.nexabank.databinding.FragmentTransferBottomSheetBinding
 import com.nexabank.repository.AccountRepository
 import com.nexabank.util.AlarmUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +29,7 @@ class AccountViewModel @Inject constructor(
     private val appSharedPreferences: AppSharedPreferences
 ) : ViewModel() {
 
-    private lateinit var binding: FragmentDashboardBinding
+    private lateinit var binding: ViewBinding
     fun bind(binding: FragmentDashboardBinding) {
         this.binding = binding
         val username = appSharedPreferences.getUsername()
@@ -37,16 +41,51 @@ class AccountViewModel @Inject constructor(
         }
     }
 
+    fun bind(binding: FragmentTransferBottomSheetBinding) {
+        this.binding = binding
+    }
+
+    fun bind(binding: ViewBinding) {
+        this.binding = binding
+    }
+
+    // To be subscribed to in the fragment
+    private val _transferResult = MutableLiveData<Result<String>>()
+    val transferResult: LiveData<Result<String>> = _transferResult
+
+    // To be subscribed to in the fragment
+    private val _depositResult = MutableLiveData<Result<String>>()
+    val depositResult: LiveData<Result<String>> = _depositResult
+
+    // To be subscribed to in the fragment
+    private val _withdrawalResult = MutableLiveData<Result<String>>()
+    val withdrawalResult: LiveData<Result<String>> = _withdrawalResult
+
+    // To be subscribed to in the fragment
+    private val _balanceResult = MutableLiveData<Result<Double>>()
+    val balanceResult: LiveData<Result<Double>> = _balanceResult
+
+    // To be subscribed to in the fragment
+    private val _logoutResult = MutableLiveData<Result<String>>()
+    val logoutResult: LiveData<Result<String>> = _logoutResult
+
+
     fun depositFunds(username: String, amount: Double) {
         viewModelScope.launch {
             val result = accountRepository.depositFunds(username, amount)
             // Handle result (success or failure)
             result.onSuccess {
                 // Deposit successful
-                AlarmUtil.showSnackBar(binding.root, result.getOrNull() ?: "Deposit successful")
+                val value = result.getOrNull() ?: "Deposit successful"
+                AlarmUtil.showSnackBar(binding.root, value)
+                _depositResult.value = Result.success(value)
             }.onFailure {
                 // Deposit failed
-                AlarmUtil.showSnackBar(binding.root, result.exceptionOrNull()?.message ?: "Deposit failed")
+                AlarmUtil.showSnackBar(
+                    binding.root,
+                    result.exceptionOrNull()?.message ?: "Deposit failed"
+                )
+                _depositResult.value = Result.failure(it)
             }
         }
     }
@@ -60,24 +99,38 @@ class AccountViewModel @Inject constructor(
                 AlarmUtil.showSnackBar(binding.root, result.getOrNull() ?: "Withdrawal successful")
             }.onFailure {
                 // Withdrawal failed
-                AlarmUtil.showSnackBar(binding.root, result.exceptionOrNull()?.message ?: "Withdrawal failed")
+                AlarmUtil.showSnackBar(
+                    binding.root,
+                    result.exceptionOrNull()?.message ?: "Withdrawal failed"
+                )
             }
         }
     }
 
-    fun transferFunds(senderUsername: String, receiverUsername: String, amount: Double) {
+    fun transferFunds(
+        senderUsername: String,
+        receiverUsername: String,
+        amount: Double,
+        description: String?
+    ) {
         viewModelScope.launch {
-            /*
-            val result = accountRepository.transferFunds(senderUsername, receiverUsername, amount)
+            val bindTransferBottomSheet = binding as FragmentTransferBottomSheetBinding
+            val result = accountRepository.transferFunds(
+                senderUsername,
+                receiverUsername,
+                amount,
+                description
+            )
             // Handle result (success or failure)
             result.onSuccess {
                 // Transfer successful
-                AlarmUtil.showSnackBar(binding.root, "Transfer successful")
+                AlarmUtil.showSnackBar(bindTransferBottomSheet.root, "Transfer successful")
+                _transferResult.value = Result.success("Transfer successful")
             }.onFailure {
                 // Transfer failed
-                AlarmUtil.showSnackBar(binding.root, "Transfer failed")
+                AlarmUtil.showSnackBar(bindTransferBottomSheet.root, "Transfer failed")
+                _transferResult.value = Result.failure(it)
             }
-            */
         }
     }
 
@@ -118,7 +171,8 @@ class AccountViewModel @Inject constructor(
             append(balance)
             append("$")
         }
-        binding.balanceCard.setValue(formattedBalance)
+        val bindDash = binding as FragmentDashboardBinding
+        bindDash.balanceCard.setValue(formattedBalance)
     }
 
     /**
@@ -129,7 +183,8 @@ class AccountViewModel @Inject constructor(
     private fun handleError(exception: Throwable) {
         val errorMessage = buildErrorMessage(exception)
         AlarmUtil.showToast(binding.root.context, errorMessage)
-        binding.balanceCard.setValue(errorMessage)
+        val bindDash = binding as FragmentDashboardBinding
+        bindDash.balanceCard.setValue(errorMessage)
         Log.e("AccountViewModel", "checkBalance: error", exception)
     }
 

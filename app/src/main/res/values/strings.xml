@@ -31,6 +31,7 @@
     <string name="visa">Visa</string>
     <string name="placeholder_card_number">**** **** **** 1234</string>
     <string name="placeholder_name">Welcome back: Hesham Bakr</string>
+    <string name="placeholder_email">email@nexabank.com</string>
     <string name="your_username">Your username</string>
     <string name="placeholder_expire_date">08/28</string>
     <string name="deposit">Deposit</string>
@@ -40,7 +41,14 @@
     <string name="finance">Finance</string>
     <string name="you_have_an_account">You have an account?</string>
     <string name="to_be_decide">To Be Decide…</string>
+    <string name="to_be_implemented">To Be Implemented…</string>
     <string name="quick_actions">Quick Actions</string>
-    <string name="logging_in">Logging in...</string>
+    <string name="logging_in">Logging in…</string>
+    <string name="registering">Registering…</string>
+    <string name="recipient_username">Recipient username</string>
+    <string name="transfer_amount">Transfer amount</string>
+    <string name="transfer_funds">Transfer funds</string>
+    <string name="amount">Amount</string>
+    <string name="description">Description</string>
 
 </resources>

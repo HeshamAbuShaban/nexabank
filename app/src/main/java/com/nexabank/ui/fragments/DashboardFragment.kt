@@ -1,16 +1,13 @@
 package com.nexabank.ui.fragments
 
 import android.os.Bundle
-import android.text.Html
-import android.text.Spannable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.nexabank.R
 import com.nexabank.databinding.FragmentDashboardBinding
+import com.nexabank.ui.fragments.bottom_sheets.TransferBottomSheetFragment
 import com.nexabank.ui.vms.AccountViewModel
 import com.nexabank.util.AlarmUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,13 +45,23 @@ class DashboardFragment : Fragment() {
     private fun setupListeners() {
         with(binding) {
             cardTransfer.setOnClickListener {
+                TransferBottomSheetFragment().show(parentFragmentManager, "TransferBottomSheet")
                 AlarmUtil.showSnackBar(binding.root, "Transfer clicked")
             }
             cardLoans.setOnClickListener {
                 AlarmUtil.showSnackBar(binding.root, "Loans clicked")
             }
+            cardPay.setOnClickListener {
+                AlarmUtil.showSnackBar(binding.root, "Pay clicked")
+            }
             cardTransaction.setOnClickListener {
                 AlarmUtil.showSnackBar(binding.root, "Transactions clicked")
+            }
+            cardSettings.setOnClickListener {
+                AlarmUtil.showSnackBar(binding.root, "Settings clicked")
+            }
+            cardCreditCard.setOnClickListener {
+                AlarmUtil.showSnackBar(binding.root, "Credit Card clicked")
             }
         }
         refreshPage()

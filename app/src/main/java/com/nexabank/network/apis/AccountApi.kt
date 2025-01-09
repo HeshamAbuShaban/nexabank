@@ -1,6 +1,7 @@
 package com.nexabank.network.apis
 
 import com.nexabank.models.dto.DepositRequest
+import com.nexabank.models.dto.TransferRequest
 import com.nexabank.models.dto.WithdrawRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,4 +26,11 @@ interface AccountApi {
     suspend fun getBalance(
         @Path("username") username: String
     ): Response<Double>
+
+    @POST("accounts/{senderUsername}/transfer")
+    suspend fun transferFunds(
+        @Path("senderUsername") senderUsername: String,
+        @Body request: TransferRequest
+    ): Response<String>
+
 }

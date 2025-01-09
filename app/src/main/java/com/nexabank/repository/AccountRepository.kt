@@ -1,6 +1,7 @@
 package com.nexabank.repository
 
 import com.nexabank.models.dto.DepositRequest
+import com.nexabank.models.dto.TransferRequest
 import com.nexabank.models.dto.WithdrawRequest
 import com.nexabank.network.apis.AccountApi
 import javax.inject.Inject
@@ -64,10 +65,27 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
         }
     }
 
+    suspend fun transferFunds(
+        senderUsername: String,
+        receiverUsername: String,
+        amount: Double,
+        description: String?
+    ): Result<String> {
+        return try {
+            val transferRequest = TransferRequest(receiverUsername, amount, description)
+            val response = api.transferFunds(senderUsername, transferRequest)
+            if (response.isSuccessful) {
+                clearCache() // Clear the cache after a successful transfer
+                Result.success(response.body() ?: "Transfer successful")
+            } else Result.failure(response.errorBody()?.string()?.let { Exception(it) } ?: Exception("Transfer failed"))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     // Method to clear the cache explicitly, if needed
-    fun clearCache() {
+    private fun clearCache() {
         cachedBalance = null
         lastFetchTime = null
-        // Add any additional logic for clearing the cache if needed
     }
 }
