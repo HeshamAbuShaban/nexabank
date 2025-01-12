@@ -30,7 +30,6 @@ class AuthenticationViewModel @Inject constructor(
 
     // Initialize viewBinding and navController
     fun bind(viewBinding: ViewBinding, navController: NavController) {
-        requireNotNull(viewBinding) { "viewBinding cannot be null" }
         this.viewBinding = viewBinding
         this.navController = navController
         initializeBindings(viewBinding)

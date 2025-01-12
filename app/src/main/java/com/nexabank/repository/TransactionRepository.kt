@@ -1,6 +1,7 @@
 package com.nexabank.repository
 
 import com.nexabank.models.Transaction
+import com.nexabank.models.dto.SpendingInsights
 import com.nexabank.models.dto.TransactionRequest
 import com.nexabank.network.apis.TransactionApi
 import javax.inject.Inject
@@ -36,6 +37,17 @@ class TransactionRepository @Inject constructor(private val api: TransactionApi)
         return try {
             val response = api.flagTransaction(transactionId)
             if (response.isSuccessful) Result.success(Unit) else Result.failure(Exception("Flagging failed"))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun spendingInsights(username: String): Result<SpendingInsights> {
+        return try {
+            val response = api.spendingInsights(username)
+            if (response.isSuccessful) Result.success(response.body()!!) else Result.failure(
+                Exception("Spending insights retrieval failed")
+            )
         } catch (e: Exception) {
             Result.failure(e)
         }

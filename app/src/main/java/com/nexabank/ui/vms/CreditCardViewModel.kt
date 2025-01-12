@@ -2,9 +2,11 @@ package com.nexabank.ui.vms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nexabank.core.AppSharedPreferences
 import com.nexabank.database.dao.CreditCardDao
 import com.nexabank.database.repo.CreditCardEntityRepository
 import com.nexabank.databinding.FragmentCreditCardBinding
+import com.nexabank.models.CreditCard
 import com.nexabank.repository.CreditCardRepository
 import com.nexabank.util.AlarmUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreditCardViewModel @Inject constructor(private val creditCardRepository: CreditCardRepository,private val creditCardEntityRepository: CreditCardEntityRepository) :
+class CreditCardViewModel @Inject constructor(private val creditCardRepository: CreditCardRepository,private val creditCardEntityRepository: CreditCardEntityRepository, private val appSharedPreferences: AppSharedPreferences) :
     ViewModel() {
     private lateinit var binding: FragmentCreditCardBinding
     fun setBinding(binding: FragmentCreditCardBinding) {
@@ -59,13 +61,14 @@ class CreditCardViewModel @Inject constructor(private val creditCardRepository: 
         }
     }
 
-    fun getAllCards(username: String) {
+    fun getAllCards(onCardsLoaded: (List<CreditCard>) -> Unit) {
         viewModelScope.launch {
-            val result = creditCardRepository.getAllCards(username)
+            val result = creditCardRepository.getAllCards(appSharedPreferences.getUsername()!!)
             // Handle result (success or failure)
             result.onSuccess { cards ->
                 // Display all cards
-                AlarmUtil.showSnackBar(binding.root, "All cards: $cards")
+                AlarmUtil.showSnackBar(binding.root, "All cards: ${cards[0]}")
+                onCardsLoaded(cards)
             }.onFailure {
                 // Handle error
                 AlarmUtil.showSnackBar(binding.root, "Error getting all cards")

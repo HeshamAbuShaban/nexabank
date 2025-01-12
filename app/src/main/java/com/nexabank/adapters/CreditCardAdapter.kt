@@ -51,7 +51,6 @@ class CreditCardAdapter : RecyclerView.Adapter<CreditCardAdapter.CreditCardViewH
             itemView.setOnClickListener {
                 if (::onItemClick.isInitialized) {
                     onItemClick(card)
-                    notifyItemChanged(adapterPosition)
                 } else {
                     throw IllegalStateException("setOnItemClickListener must be called before using the adapter.")
                 }

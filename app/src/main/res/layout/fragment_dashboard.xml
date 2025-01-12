@@ -96,13 +96,13 @@
                     app:title="@string/transfer" />
 
                 <com.nexabank.ui.views.CategoryCard
-                    android:id="@+id/cardPay"
+                    android:id="@+id/cardDeposit"
                     android:layout_width="@dimen/_105sdp"
                     android:layout_height="@dimen/_105sdp"
                     android:layout_margin="@dimen/_2sdp"
                     android:layout_weight="1"
-                    app:logo="@drawable/ic_pay_fit"
-                    app:title="@string/pay" />
+                    app:logo="@drawable/ic_deposit_fit"
+                    app:title="@string/deposit" />
             </LinearLayout>
 
             <LinearLayout
@@ -122,41 +122,25 @@
                     app:title="@string/loans" />
 
                 <com.nexabank.ui.views.CategoryCard
-                    android:id="@+id/cardTransaction"
+                    android:id="@+id/cardWithdraw"
                     android:layout_width="@dimen/_105sdp"
                     android:layout_height="@dimen/_105sdp"
                     android:layout_margin="@dimen/_2sdp"
                     android:layout_weight="1"
-                    app:logo="@drawable/ic_transactions_fit"
-                    app:title="@string/transactions" />
+                    app:logo="@drawable/ic_withdraw_fit"
+                    app:title="@string/withdraw" />
             </LinearLayout>
 
             <!-- third row -->
-            <LinearLayout
-                android:id="@+id/row3"
+            <com.nexabank.ui.views.CategoryCard
+                android:id="@+id/cardCreditCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_weight="1"
+                app:logo="@drawable/ic_credit_card"
+                app:title="@string/credit_cards" />
 
-                <com.nexabank.ui.views.CategoryCard
-                    android:id="@+id/cardCreditCard"
-                    android:layout_width="@dimen/_105sdp"
-                    android:layout_height="@dimen/_105sdp"
-                    android:layout_margin="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    app:logo="@drawable/ic_credit_card"
-                    app:title="@string/credit_cards" />
-
-                <com.nexabank.ui.views.CategoryCard
-                    android:id="@+id/cardSettings"
-                    android:layout_width="@dimen/_105sdp"
-                    android:layout_height="@dimen/_105sdp"
-                    android:layout_margin="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    app:logo="@drawable/ic_settings"
-                    app:title="@string/settings" />
-            </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

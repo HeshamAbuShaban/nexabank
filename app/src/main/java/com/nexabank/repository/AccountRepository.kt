@@ -65,6 +65,24 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
         }
     }
 
+    suspend fun getBalanceRefresh(username: String): Result<Double> {
+        val currentTime = System.currentTimeMillis()
+        return try {
+            val response = api.getBalance(username)
+            // Update cache
+            val balance = response.body() ?: 0.0
+            cachedBalance = balance
+            lastFetchTime = currentTime
+            if (response.isSuccessful) {
+                Result.success(response.body() ?: 0.0)
+            } else {
+                Result.failure(Exception("Balance retrieval failed"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     suspend fun transferFunds(
         senderUsername: String,
         receiverUsername: String,
@@ -77,7 +95,8 @@ class AccountRepository @Inject constructor(private val api: AccountApi) {
             if (response.isSuccessful) {
                 clearCache() // Clear the cache after a successful transfer
                 Result.success(response.body() ?: "Transfer successful")
-            } else Result.failure(response.errorBody()?.string()?.let { Exception(it) } ?: Exception("Transfer failed"))
+            } else Result.failure(response.errorBody()?.string()?.let { Exception(it) }
+                ?: Exception("Transfer failed"))
         } catch (e: Exception) {
             Result.failure(e)
         }

@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.nexabank.databinding.FragmentDashboardBinding
+import com.nexabank.ui.fragments.bottom_sheets.DepositBottomSheetFragment
 import com.nexabank.ui.fragments.bottom_sheets.TransferBottomSheetFragment
+import com.nexabank.ui.fragments.bottom_sheets.WithdrawBottomSheetFragment
 import com.nexabank.ui.vms.AccountViewModel
 import com.nexabank.util.AlarmUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,19 +48,15 @@ class DashboardFragment : Fragment() {
         with(binding) {
             cardTransfer.setOnClickListener {
                 TransferBottomSheetFragment().show(parentFragmentManager, "TransferBottomSheet")
-                AlarmUtil.showSnackBar(binding.root, "Transfer clicked")
+            }
+            cardDeposit.setOnClickListener {
+                DepositBottomSheetFragment().show(parentFragmentManager, "DepositBottomSheet")
+            }
+            cardWithdraw.setOnClickListener {
+                WithdrawBottomSheetFragment().show(parentFragmentManager, "WithdrawBottomSheet")
             }
             cardLoans.setOnClickListener {
                 AlarmUtil.showSnackBar(binding.root, "Loans clicked")
-            }
-            cardPay.setOnClickListener {
-                AlarmUtil.showSnackBar(binding.root, "Pay clicked")
-            }
-            cardTransaction.setOnClickListener {
-                AlarmUtil.showSnackBar(binding.root, "Transactions clicked")
-            }
-            cardSettings.setOnClickListener {
-                AlarmUtil.showSnackBar(binding.root, "Settings clicked")
             }
             cardCreditCard.setOnClickListener {
                 AlarmUtil.showSnackBar(binding.root, "Credit Card clicked")
@@ -69,13 +67,12 @@ class DashboardFragment : Fragment() {
 
     private fun refreshPage() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
             val str = buildString {
                 append("Refreshed at ")
                 append(AlarmUtil.getCurrentTime())
             }
             binding.balanceCard.setValue("Refreshing...")
-            accountViewModel.setupBalance()
+            accountViewModel.setupBalanceRefresh()
             AlarmUtil.showSnackBar(binding.root, str)
             /*
             android.os.Handler(Looper.getMainLooper()).postDelayed({

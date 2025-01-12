@@ -32,4 +32,9 @@ interface LoanApi {
         @Path("username") username: String,
         @Path("loanId") loanId: Long
     ): Response<Unit>
+
+    @GET("loans/{username}")
+    suspend fun getLoans(
+        @Path("username") username: String
+    ): Response<List<Loan>>
 }

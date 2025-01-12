@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nexabank.adapters.LoanAdapter
 import com.nexabank.databinding.FragmentLoanBinding
-import com.nexabank.models.Loan
-import com.nexabank.models.User
-import com.nexabank.models.enums.Role
+import com.nexabank.ui.vms.LoanViewModel
 import com.nexabank.util.AlarmUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoanFragment : Fragment() {
     private lateinit var binding: FragmentLoanBinding
+    private val viewModel: LoanViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoanBinding.inflate(inflater, container, false)
+        viewModel.setBinding(binding)
         return binding.root
     }
 
@@ -29,8 +32,17 @@ class LoanFragment : Fragment() {
     }
 
     private fun init() {
+        /*setupListeners()*/
         setupRV()
+        refreshLoans()
     }
+
+    /*
+    private fun setupListeners() {
+     // Show Bottom Sheets for each loan option , im thinking an expanded floating action button
+      with(binding) {btnCreeLoan.setOnClickListener {}}
+    }
+     */
 
     private fun setupRV() {
         val loanAdapter = LoanAdapter().apply {
@@ -38,61 +50,13 @@ class LoanFragment : Fragment() {
                 // Handle item click
                 AlarmUtil.showSnackBar(
                     binding.root,
-                    "Loan for: ${it.user} with amount: ${it.amount} and repayment period: ${it.repaymentPeriod} he still has: ${it.remainingBalance} to be repaid in: ${it.dueDate} is clicked"
+                    "Loan for: ${it.user.username} with amount: ${it.amount} and repayment period: ${it.repaymentPeriod} he still has: ${it.remainingBalance} to be repaid in: ${it.dueDate} is clicked"
                 )
             }
-            loans = mutableListOf(
-                Loan(
-                    id = 1,
-                    user = User(
-                        id = 1,
-                        username = "Hesham AbuShaban",
-                        "hesham@gmail.com",
-                        200000.00,
-                        Role.USER
-                    ),
-                    amount = 2000.00,
-                    repaymentPeriod = 12,
-                    requestDate = "20/1/2025",
-                    dueDate = null
-                ), Loan(
-                    id = 2,
-                    user = User(
-                        id = 2,
-                        username = "Haneen AbuShaban",
-                        "haneen@gmail.com",
-                        100000.00,
-                        Role.USER
-                    ),
-                    amount = 1000.00,
-                    repaymentPeriod = 12,
-                    requestDate = "20/1/2025",
-                    dueDate = null
-                ), Loan(
-                    id = 3,
-                    user = User(
-                        id = 3,
-                        username = "Ahmed AbuShaban",
-                        "ahmed@gmail.com",
-                        300000.00,
-                        Role.USER
-                    ),
-                    amount = 3000.00,
-                    repaymentPeriod = 12,
-                    requestDate = "20/1/2025",
-                    dueDate = null
-                ), Loan(
-                    id = 4,
-                    user = User(
-                        id = 4, username = "Bakr AbuShaban", "bakr@gmail.com", 300000.00, Role.USER
-                    ),
-                    amount = 4000.00,
-                    repaymentPeriod = 12,
-                    requestDate = "20/1/2025",
-                    dueDate = null
-                )
-            )
         }
+        viewModel.getLoans(onLoansRetrieved = { loans ->
+            loanAdapter.loans = loans
+        })
         with(binding.rvLoans) {
             adapter = loanAdapter
             setHasFixedSize(true)
@@ -101,6 +65,17 @@ class LoanFragment : Fragment() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
+        }
+    }
+
+    private fun refreshLoans() {
+        with(binding.loanSwipeRefreshLayout) {
+            setOnRefreshListener {
+                viewModel.getLoans(onLoansRetrieved = { loans ->
+                    AlarmUtil.showSnackBar(binding.root, "Loan Test : ${loans[0]}")
+                })
+                isRefreshing = false
+            }
         }
     }
 }

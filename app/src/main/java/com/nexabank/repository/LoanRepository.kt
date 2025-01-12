@@ -48,4 +48,17 @@ class LoanRepository @Inject constructor(private val api: LoanApi) {
             Result.failure(e)
         }
     }
+
+    suspend fun getLoans(username: String): Result<List<Loan>> {
+        return try {
+            val response = api.getLoans(username)
+            if (response.isSuccessful)
+                Result.success(response.body()!!)
+            else Result.failure(
+                Exception("Loan retrieval failed")
+            )
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

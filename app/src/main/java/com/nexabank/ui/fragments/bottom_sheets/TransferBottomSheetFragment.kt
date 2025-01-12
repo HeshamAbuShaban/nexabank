@@ -64,10 +64,10 @@ class TransferBottomSheetFragment : BottomSheetDialogFragment() {
     private fun observeTransferResult() {
         viewModel.transferResult.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
-                AlarmUtil.showToast(requireContext(), "Transfer Successful")
+                AlarmUtil.showToast(requireContext(), result.getOrNull() ?: "Transfer Successful")
                 this.dismiss()
             } else {
-                AlarmUtil.showToast(requireContext(), "Transfer Failed")
+                AlarmUtil.showToast(requireContext(), result.exceptionOrNull()?.message ?: "Transfer Failed")
                 // Show error message if needed
             }
         }

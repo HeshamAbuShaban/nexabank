@@ -1,6 +1,7 @@
 package com.nexabank.network.apis
 
 import com.nexabank.models.Transaction
+import com.nexabank.models.dto.SpendingInsights
 import com.nexabank.models.dto.TransactionRequest
 import retrofit2.Response
 import retrofit2.http.*
@@ -21,4 +22,7 @@ interface TransactionApi {
     suspend fun flagTransaction(
         @Path("transactionId") transactionId: Long
     ): Response<Unit>
+
+    @GET("transactions/{username}/spending-insights")
+    suspend fun spendingInsights(@Path("username") username: String): Response<SpendingInsights>
 }

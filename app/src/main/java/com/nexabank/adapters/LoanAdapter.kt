@@ -12,7 +12,6 @@ import com.nexabank.models.Loan
 import com.nexabank.models.enums.LoanStatus
 
 class LoanAdapter : RecyclerView.Adapter<LoanAdapter.LoanViewHolder>() {
-    private lateinit var binding: ItemLoanBinding
 
 /*
     private val allLoans = loans
@@ -61,7 +60,6 @@ class LoanAdapter : RecyclerView.Adapter<LoanAdapter.LoanViewHolder>() {
             itemView.setOnClickListener {
                 if (::onItemClick.isInitialized) {
                     onItemClick(loan)
-                    notifyItemChanged(adapterPosition)
                 } else {
                     throw IllegalStateException("setOnItemClickListener must be called before using the adapter.")
                 }
@@ -70,8 +68,7 @@ class LoanAdapter : RecyclerView.Adapter<LoanAdapter.LoanViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoanViewHolder {
-        binding = ItemLoanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LoanViewHolder(binding)
+        return LoanViewHolder(ItemLoanBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: LoanViewHolder, position: Int) {

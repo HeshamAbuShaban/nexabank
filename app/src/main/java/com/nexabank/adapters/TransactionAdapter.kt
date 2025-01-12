@@ -12,7 +12,6 @@ import com.nexabank.models.Transaction
 import com.nexabank.models.enums.TransactionStatus
 
 class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {
-    private lateinit var binding: ItemTransactionBinding
     private val differ = AsyncListDiffer(this, TransactionDiffCallback)
 
     private object TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>() {
@@ -46,7 +45,7 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
         transactions.filter { it.status == TransactionStatus.COMPLETED }
     private val pendingTransactions = transactions.filter { it.status == TransactionStatus.PENDING }
 
-    inner class TransactionViewHolder(binding: ItemTransactionBinding) :
+    inner class TransactionViewHolder(private val binding: ItemTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
@@ -68,7 +67,6 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
             itemView.setOnClickListener {
                 if (::onItemClick.isInitialized) {
                     onItemClick(transaction)
-                    notifyItemChanged(adapterPosition)
                 } else {
                     throw IllegalStateException("setOnItemClickListener must be called before using the adapter.")
                 }
@@ -77,8 +75,13 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
-        binding = ItemTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TransactionViewHolder(binding)
+        return TransactionViewHolder(
+            ItemTransactionBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {

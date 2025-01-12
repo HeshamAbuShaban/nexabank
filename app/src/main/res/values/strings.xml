@@ -48,6 +48,8 @@
     <string name="recipient_username">Recipient username</string>
     <string name="transfer_amount">Transfer amount</string>
     <string name="transfer_funds">Transfer funds</string>
+    <string name="deposit_funds">Deposit funds</string>
+    <string name="withdraw_funds">Withdraw funds</string>
     <string name="amount">Amount</string>
     <string name="description">Description</string>
 

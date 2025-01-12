@@ -62,10 +62,6 @@ class AccountViewModel @Inject constructor(
     val withdrawalResult: LiveData<Result<String>> = _withdrawalResult
 
     // To be subscribed to in the fragment
-    private val _balanceResult = MutableLiveData<Result<Double>>()
-    val balanceResult: LiveData<Result<Double>> = _balanceResult
-
-    // To be subscribed to in the fragment
     private val _logoutResult = MutableLiveData<Result<String>>()
     val logoutResult: LiveData<Result<String>> = _logoutResult
 
@@ -96,13 +92,11 @@ class AccountViewModel @Inject constructor(
             // Handle result (success or failure)
             result.onSuccess {
                 // Withdrawal successful
-                AlarmUtil.showSnackBar(binding.root, result.getOrNull() ?: "Withdrawal successful")
+                val response = result.getOrNull() ?: "Withdrawal successful"
+                _withdrawalResult.value = Result.success(response)
             }.onFailure {
                 // Withdrawal failed
-                AlarmUtil.showSnackBar(
-                    binding.root,
-                    result.exceptionOrNull()?.message ?: "Withdrawal failed"
-                )
+                _withdrawalResult.value = Result.failure(it)
             }
         }
     }
@@ -147,6 +141,20 @@ class AccountViewModel @Inject constructor(
         }
     }
 
+    fun setupBalanceRefresh() {
+        viewModelScope.launch {
+            try {
+                val result =
+                    accountRepository.getBalanceRefresh(appSharedPreferences.getUsername()!!)
+                handleBalanceResult(result)
+                val bindDash = binding as FragmentDashboardBinding
+                bindDash.swipeRefreshLayout.isRefreshing = false
+            } catch (e: Exception) {
+                handleError(e)
+            }
+        }
+    }
+
     /**
      * Handles the result of the balance retrieval operation.
      *
@@ -169,7 +177,7 @@ class AccountViewModel @Inject constructor(
         // Update UI with balance if needed
         val formattedBalance = buildString {
             append(balance)
-            append("$")
+            append(" $")
         }
         val bindDash = binding as FragmentDashboardBinding
         bindDash.balanceCard.setValue(formattedBalance)
