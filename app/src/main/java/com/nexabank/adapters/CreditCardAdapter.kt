@@ -46,7 +46,7 @@ class CreditCardAdapter : RecyclerView.Adapter<CreditCardAdapter.CreditCardViewH
             with(binding) {
                 tvCardNumber.text = card.cardNumber
                 tvCardExpiry.text = card.expirationDate
-                tvCardType.text = card.cardType.name
+                tvCardType.text = card.cardType?.name ?: "Unknown"
             }
             itemView.setOnClickListener {
                 if (::onItemClick.isInitialized) {

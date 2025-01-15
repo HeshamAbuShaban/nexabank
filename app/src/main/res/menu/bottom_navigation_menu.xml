@@ -7,27 +7,22 @@
         android:orderInCategory="1"
         android:title="@string/dashboard" />
 
-    <!--<item
+    <item
         android:id="@+id/transaction_destination"
-        android:icon="@drawable/ic_transactions"
+        android:icon="@drawable/ic_transactions_fit"
         android:orderInCategory="2"
         android:title="@string/transactions" />
 
     <item
         android:id="@+id/loan_destination"
-        android:icon="@drawable/ic_loans"
+        android:icon="@drawable/ic_loan_fit"
         android:orderInCategory="3"
-        android:title="@string/loans" />-->
-
-    <item android:id="@+id/finance_destination"
-        android:icon="@drawable/ic_account_balance"
-        android:orderInCategory="2"
-        android:title="@string/finance" />
+        android:title="@string/loans" />
 
     <item
-        android:id="@+id/settings_destination"
-        android:icon="@drawable/ic_settings"
-        android:orderInCategory="5"
-        android:title="@string/settings" />
+        android:id="@+id/credit_card_destination"
+        android:icon="@drawable/ic_credit_card"
+        android:orderInCategory="4"
+        android:title="@string/credit_cards" />
 
 </menu>

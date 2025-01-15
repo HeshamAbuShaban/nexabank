@@ -10,6 +10,6 @@ data class CreditCard(
     val isFrozen: Boolean,
     val balance: Double,
 //    val creditLimit: Double,
-    val cardType: CardType,
+    val cardType: CardType? = CardType.Visa,
 //    val isDebit: Boolean,
 )

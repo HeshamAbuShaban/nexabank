@@ -52,5 +52,8 @@
     <string name="withdraw_funds">Withdraw funds</string>
     <string name="amount">Amount</string>
     <string name="description">Description</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="finance_summary">Finance Summary</string>
 
 </resources>
