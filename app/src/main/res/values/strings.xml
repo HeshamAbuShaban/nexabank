@@ -55,5 +55,9 @@
     <string name="about">About</string>
     <string name="logout">Logout</string>
     <string name="finance_summary">Finance Summary</string>
+    <!-- Biometric -->
+    <string name="biometric_title">Biometric Authentication</string>
+    <string name="biometric_subtitle">Confirm your identity to continue</string>
+    <string name="biometric_description">Authenticate using your biometric credentials</string>
 
 </resources>

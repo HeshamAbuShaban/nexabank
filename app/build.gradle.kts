@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.security.crypto)
+    implementation(libs.androidx.biometric)
 
     // Testing
     testImplementation(libs.junit)

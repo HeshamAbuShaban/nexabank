@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NexaBank</string>
+    <!--Screens Names-->
+    <string name="dashboard">لوحة التحكم</string>
+    <string name="transactions">المعاملات</string>
+    <string name="loans">القروض</string>
+    <string name="settings">الإعدادات</string>
+    <string name="credit_cards">البطاقات الائتمانية</string>
+    <!--Hint Text-->
+    <string name="enter_your_email">أدخل بريدك الإلكتروني</string>
+    <string name="enter_your_password">كلمة المرور الخاصة بك</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="the_app_logo">شعار التطبيق</string>
+    <string name="enter_your_username">أدخل اسم المستخدم الخاص بك</string>
+    <string name="do_you_have_an_initial_balance">هل لديك رصيد أولي؟</string>
+    <string name="register">تسجيل</string>
+    <string name="don_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="transfer_money">تحويل الأموال</string>
+    <string name="transfer">تحويل</string>
+    <string name="withdraw_money">سحب الأموال</string>
+    <string name="withdraw">سحب</string>
+    <string name="the_analytics_graph">الرسم البياني للتحليلات</string>
+    <string name="pay">دفع</string>
+    <string name="add_new_loan">إضافة قرض جديد</string>
+    <string name="credit_card_details">تفاصيل البطاقة الائتمانية</string>
+    <string name="your_balance">رصيدك</string>
+    <string name="placeholder_amount_money">$25,552.92</string>
+    <string name="greeting_place_holder">مرحباً، هشام أبو شعبان!</string>
+    <string name="transaction_icon">أيقونة المعاملة</string>
+    <string name="visa">فيزا</string>
+    <string name="placeholder_card_number">**** **** **** 1234</string>
+    <string name="placeholder_name">مرحباً بعودتك: هشام بكر</string>
+    <string name="placeholder_email">email@nexabank.com</string>
+    <string name="your_username">اسم المستخدم الخاص بك</string>
+    <string name="placeholder_expire_date">08/28</string>
+    <string name="deposit">إيداع</string>
+    <string name="recent_transactions">المعاملات الأخيرة</string>
+    <string name="money_placeholder">$12,345.67</string>
+    <string name="current_balance">الرصيد الحالي</string>
+    <string name="finance">المالية</string>
+    <string name="you_have_an_account">هل لديك حساب؟</string>
+    <string name="to_be_decide">سيتم تحديده…</string>
+    <string name="to_be_implemented">سيتم تنفيذه…</string>
+    <string name="quick_actions">الإجراءات السريعة</string>
+    <string name="logging_in">جارٍ تسجيل الدخول…</string>
+    <string name="registering">جارٍ التسجيل…</string>
+    <string name="recipient_username">اسم مستخدم المستلم</string>
+    <string name="transfer_amount">مبلغ التحويل</string>
+    <string name="transfer_funds">تحويل الأموال</string>
+    <string name="deposit_funds">إيداع الأموال</string>
+    <string name="withdraw_funds">سحب الأموال</string>
+    <string name="amount">المبلغ</string>
+    <string name="description">الوصف</string>
+    <string name="about">عن</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="finance_summary">ملخص المالية</string>
+    <!-- Biometric -->
+    <string name="biometric_title">المصادقة البيومترية</string>
+    <string name="biometric_subtitle">أكد هويتك للمتابعة</string>
+    <string name="biometric_description">مصادقة باستخدام بياناتك البيومترية</string>
+</resources>

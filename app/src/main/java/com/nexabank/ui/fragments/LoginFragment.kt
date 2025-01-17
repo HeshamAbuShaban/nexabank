@@ -15,6 +15,7 @@ import com.nexabank.models.dto.UserRequest
 import com.nexabank.ui.MainActivity
 import com.nexabank.ui.vms.AuthenticationViewModel
 import com.nexabank.util.AlarmUtil
+import com.nexabank.util.BiometricAuthManager
 import com.nexabank.util.InputValidator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,7 @@ class LoginFragment : Fragment() {
     private val viewModel: AuthenticationViewModel by viewModels()
     private lateinit var userRequest: UserRequest
     private lateinit var findNavController: NavController
+    private lateinit var biometricAuthManager: BiometricAuthManager
 
 
     override fun onCreateView(
@@ -44,13 +46,14 @@ class LoginFragment : Fragment() {
 
     private fun init() {
         setupListeners()
+        biometricSetup()
     }
 
     private fun setupListeners() {
         with(binding) {
             loginButton.setOnClickListener {
 //                if (checkInputs()) {
-                preformLogin()
+                biometricAuthManager.authenticate()
 //                }
             }
             createAccount.setOnClickListener {
@@ -103,5 +106,25 @@ class LoginFragment : Fragment() {
                 binding.loginButton.text = getString(R.string.login)
             })
         }
+    }
+
+    private fun biometricSetup() {
+        biometricAuthManager = BiometricAuthManager(
+            fragment = this,
+            onAuthSuccess = {
+                preformLogin()
+            },
+            onAuthError = { errorCode, errString ->
+                AlarmUtil.showSnackBar(binding.root, "Authentication error: $errString")
+                binding.loginButton.isEnabled = true
+                binding.loginButton.text = getString(R.string.login)
+                AlarmUtil.showSnackBar(binding.root, "Authentication error Code: $errorCode")
+            },
+            onAuthFailed = {
+                AlarmUtil.showSnackBar(binding.root, "Authentication failed")
+                binding.loginButton.isEnabled = true
+                binding.loginButton.text = getString(R.string.login)
+            }
+        )
     }
 }
